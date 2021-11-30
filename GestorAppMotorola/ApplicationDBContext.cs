@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace API_Gestion_Instalacion_APP
+namespace GestorAppMotorola
 {
     public class ApplicationDBContext : DbContext
     {
