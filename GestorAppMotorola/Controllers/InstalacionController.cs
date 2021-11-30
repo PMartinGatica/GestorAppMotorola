@@ -11,11 +11,11 @@ namespace GestorAppMotorola.Controllers
 {
     [Route("api/1.0/[controller]")]
     [ApiController]
-    public class IntalacionController : ControllerBase
+    public class InstalacionController : ControllerBase
     {
         private readonly ApplicationDBContext context;
 
-        public IntalacionController(ApplicationDBContext context)
+        public InstalacionController(ApplicationDBContext context)
         {
             this.context = context;
         }
