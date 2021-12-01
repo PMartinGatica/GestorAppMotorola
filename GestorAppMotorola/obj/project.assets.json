@@ -9523,25 +9523,25 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Usuario\\.nuget\\packages\\": {},
+    "C:\\Users\\Pablo\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {},
     "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Usuario\\Source\\Repos\\GestorAppMotorola\\GestorAppMotorola\\GestorAppMotorola.csproj",
+      "projectUniqueName": "C:\\Users\\Pablo\\Source\\Repos\\GestorAppMotorola\\GestorAppMotorola\\GestorAppMotorola.csproj",
       "projectName": "GestorAppMotorola",
-      "projectPath": "C:\\Users\\Usuario\\Source\\Repos\\GestorAppMotorola\\GestorAppMotorola\\GestorAppMotorola.csproj",
-      "packagesPath": "C:\\Users\\Usuario\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Usuario\\Source\\Repos\\GestorAppMotorola\\GestorAppMotorola\\obj\\",
+      "projectPath": "C:\\Users\\Pablo\\Source\\Repos\\GestorAppMotorola\\GestorAppMotorola\\GestorAppMotorola.csproj",
+      "packagesPath": "C:\\Users\\Pablo\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Pablo\\Source\\Repos\\GestorAppMotorola\\GestorAppMotorola\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
         "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
       ],
       "configFilePaths": [
-        "C:\\Users\\Usuario\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Pablo\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"

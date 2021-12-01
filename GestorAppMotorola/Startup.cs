@@ -29,7 +29,7 @@ namespace GestorAppMotorola
         {
 
             services.AddControllers();
-            services.AddDbContext<ApplicationDBContext>(opt => opt.UseSqlServer("server=localhost;database=bbdd_motorola;user=root;password=root"));
+            services.AddDbContext<ApplicationDBContext>(opt => opt.UseMySQL("server=localhost;database=bbdd_motorola;user=root;password=root"));
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "GestorAppMotorola", Version = "v1" });
