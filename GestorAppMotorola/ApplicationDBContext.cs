@@ -16,6 +16,7 @@ namespace GestorAppMotorola
         public DbSet<Operario> Operario { get; set; }
         public DbSet<App> App { get; set; }
         public DbSet<Instalacion> Instalacion { get; set; }
+        public DbSet<Sensor> Sensor { get; set; }
 
 
     }
