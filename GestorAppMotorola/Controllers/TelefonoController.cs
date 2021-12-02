@@ -43,7 +43,7 @@ namespace GestorAppMotorola.Controllers
 
             if (telefonoOK)
             {
-                return BadRequest($"No existe un telefono de la marca {telefono.Marca}");
+                return BadRequest($"Ya existe un telefono de la marca {telefono.Marca}");
             }
 
             context.Add(telefono);
