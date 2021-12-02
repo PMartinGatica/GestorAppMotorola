@@ -78,7 +78,7 @@ namespace GestorAppMotorola.Controllers
             return NoContent();
         }
 
-        [HttpDelete("{id=int}")]
+        [HttpDelete("{id}")]
 
         public async Task<ActionResult> Delete(int id)
         {
