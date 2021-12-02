@@ -42,7 +42,7 @@ namespace GestorAppMotorola.Controllers
 
             if (sensorOK)
             {
-                return BadRequest($"Ya existe una aplicacion con el nombre {sensor.Nombre}");
+                return BadRequest($"No existe un sensor con el nombre {sensor.Nombre}");
             }
 
             context.Add(sensor);
