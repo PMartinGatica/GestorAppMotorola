@@ -1,6 +1,6 @@
 # GestorAppMotorola
 
-##Desarrollo de una API para gestionar instalaciones de apps
+## Desarrollo de una API para gestionar instalaciones de apps
 
 Una empresa que prepara smartphones para la venta al público tiene como tarea
 instalar diferentes apps que el fabricante ha definido entregar de manera
