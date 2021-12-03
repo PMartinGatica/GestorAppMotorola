@@ -27,14 +27,21 @@ namespace GestorAppMotorola.Controllers
         [HttpGet]
         public async Task<ActionResult<List<Operario>>> Get()
         {
-            return await context.Operario.ToListAsync();
+            return await context.operario.ToListAsync();
         }
 
+        [HttpGet("{nombre}")]
+        public async Task<ActionResult<List<Operario>>> Get(string nombre)
+        {
+            var operarios = await context.operario.Where(x => x.Nombre.Contains(nombre)).ToListAsync();
+
+            return operarios;
+        }
         [HttpPost]
 
         public async Task<ActionResult> Post(OperarioCreacionDTO operarioCreacionDTO)
         {
-            var yaexiste = await context.Operario.AnyAsync(x => x.Nombre == operarioCreacionDTO.Nombre);
+            var yaexiste = await context.operario.AnyAsync(x => x.Nombre == operarioCreacionDTO.Nombre);
 
             if (yaexiste)
             {
@@ -57,7 +64,7 @@ namespace GestorAppMotorola.Controllers
                 return BadRequest("El id del Operario no coincide con el id de la URL");
             }
 
-            var yaexiste = await context.Operario.AnyAsync(x => x.Id == id);
+            var yaexiste = await context.operario.AnyAsync(x => x.Id == id);
 
             if (!yaexiste)
             {
@@ -74,7 +81,7 @@ namespace GestorAppMotorola.Controllers
 
         public async Task<ActionResult> Delete(int id)
         {
-            var yaexiste = await context.Operario.AnyAsync(x => x.Id == id);
+            var yaexiste = await context.operario.AnyAsync(x => x.Id == id);
 
             if (!yaexiste)
             {
