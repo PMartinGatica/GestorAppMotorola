@@ -1,4 +1,6 @@
-﻿using GestorAppMotorola.Modelos;
+﻿using AutoMapper;
+using GestorAppMotorola.DTOs;
+using GestorAppMotorola.Modelos;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -14,10 +16,12 @@ namespace GestorAppMotorola.Controllers
     public class OperarioController : ControllerBase
     {
         private readonly ApplicationDBContext context;
+        private readonly IMapper mapper;
 
-        public OperarioController(ApplicationDBContext context)
+        public OperarioController(ApplicationDBContext context, IMapper mapper)
         {
             this.context = context;
+            this.mapper = mapper;
         }
 
         [HttpGet]
@@ -28,16 +32,18 @@ namespace GestorAppMotorola.Controllers
 
         [HttpPost]
 
-        public async Task<ActionResult> Post(Operario Operario)
+        public async Task<ActionResult> Post(OperarioCreacionDTO operarioCreacionDTO)
         {
-            var yaexiste = await context.Operario.AnyAsync(x => x.Nombre == Operario.Nombre);
+            var yaexiste = await context.Operario.AnyAsync(x => x.Nombre == operarioCreacionDTO.Nombre);
 
             if (yaexiste)
             {
-                return BadRequest($"Ya existe el nombre {Operario.Nombre}");
+                return BadRequest($"Ya existe el nombre {operarioCreacionDTO.Nombre}");
             }
 
-            context.Add(Operario);
+            var operario = mapper.Map<Operario>(operarioCreacionDTO);
+
+            context.Add(operario);
             await context.SaveChangesAsync();
             return Ok();
         }

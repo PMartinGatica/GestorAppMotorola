@@ -27,7 +27,7 @@ namespace GestorAppMotorola
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
+            services.AddAutoMapper(typeof(Startup));
             services.AddControllers();
             services.AddDbContext<ApplicationDBContext>(opt => opt.UseMySQL("server=localhost;database=bbdd_motorola;user=root;password=root"));
             services.AddSwaggerGen(c =>
