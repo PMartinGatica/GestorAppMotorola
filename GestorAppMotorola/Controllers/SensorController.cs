@@ -33,9 +33,10 @@ namespace GestorAppMotorola.Controllers
         public async Task<ActionResult<Sensor>> Get(int id)
         {
            var sensorOK = await context.Sensor.FirstOrDefaultAsync(x => x.Id == id);
+
            if (sensorOK == null)
             {
-                return NotFound();
+                return NotFound($"No existe el sensor con ID: {sensorOK.Id}");
             }
             return sensorOK;
         }

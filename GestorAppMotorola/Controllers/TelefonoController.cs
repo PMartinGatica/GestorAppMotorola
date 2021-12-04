@@ -34,9 +34,10 @@ namespace GestorAppMotorola.Controllers
         public async Task<ActionResult<Telefono>> Get(int id)
         {
             var telefonoOK = await context.Telefono.FirstOrDefaultAsync(x => x.Id == id);
+
             if (telefonoOK == null)
             {
-                return NotFound();
+                return NotFound($"No existe el telefono con ID : {telefonoOK.Id}");
             }
             return telefonoOK;
         }
@@ -70,7 +71,7 @@ namespace GestorAppMotorola.Controllers
 
             if (!telefonoOK)
             {
-                return NotFound($"No existe el telefono con el id {telefono.Id}");
+                return NotFound($"No existe el telefono con el ID : {telefono.Id}");
             }
 
             context.Update(telefono);
