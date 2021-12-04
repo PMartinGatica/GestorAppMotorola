@@ -32,7 +32,7 @@ namespace GestorAppMotorola.Controllers
         }
 
         [HttpGet("{nombre}")]
-        public async Task<ActionResult<List<operario>>> Get(string nombre)
+        public async Task<ActionResult<List<Operario>>> Get(string nombre)
         {
             var operarios = await context.operario.Where(x => x.Nombre.Contains(nombre)).ToListAsync();
 
@@ -42,7 +42,7 @@ namespace GestorAppMotorola.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<OperarioGetDTO>> Get(int id)
         {
-            var oper = await context.operario.FirstOrDefaultAsync(x => x.Id == id);
+            var oper = await context.operario.Include(x => x.instalacion).FirstOrDefaultAsync(x => x.Id == id);
 
             if (oper == null)
             {
@@ -64,7 +64,7 @@ namespace GestorAppMotorola.Controllers
                 return BadRequest($"Ya existe el nombre {operarioCreacionDTO.Nombre}");
             }
 
-            var operario = mapper.Map<operario>(operarioCreacionDTO);
+            var operario = mapper.Map<Operario>(operarioCreacionDTO);
 
             context.Add(operario);
             await context.SaveChangesAsync();
@@ -73,7 +73,7 @@ namespace GestorAppMotorola.Controllers
 
         [HttpPut("{id}")]
 
-        public async Task<ActionResult> Put(operario operario, int id)
+        public async Task<ActionResult> Put(Operario operario, int id)
         {
             if (operario.Id != id)
             {
@@ -104,7 +104,7 @@ namespace GestorAppMotorola.Controllers
                 return BadRequest();
             }
 
-            context.Remove(new operario() { Id = id });
+            context.Remove(new Operario() { Id = id });
             await context.SaveChangesAsync();
             return NoContent();
         }

@@ -10,5 +10,11 @@ namespace GestorAppMotorola.Modelos
         public int Id { get; set; }
         public Boolean Exitosa { get; set; }
         public DateTime Fecha { get; set; }
+
+        public App app { get; set; }
+        public Operario operario { get; set; }
+
+
+
     }
 }

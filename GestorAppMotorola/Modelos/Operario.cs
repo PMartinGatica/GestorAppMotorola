@@ -5,10 +5,13 @@ using System.Threading.Tasks;
 
 namespace GestorAppMotorola.Modelos
 {
-    public class operario
+    public class Operario
     {
         public int Id { get; set; }
         public string Nombre { get; set; }
         public string Apellido { get; set; }
+
+        public Instalacion instalacion { get; set; }
+
     }
 }

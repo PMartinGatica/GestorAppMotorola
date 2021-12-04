@@ -10,6 +10,8 @@ namespace GestorAppMotorola.Modelos
         public int Id { get; set; }
         public string Nombre { get; set; }
 
-       // public List<Instalaciones> iInstalaciones { get; set; }
+       public List<Instalacion> Instalacion { get; set; }
+       
+
     }
 }
