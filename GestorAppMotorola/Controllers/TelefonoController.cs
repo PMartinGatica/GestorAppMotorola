@@ -1,4 +1,6 @@
-﻿using GestorAppMotorola.Modelos;
+﻿using AutoMapper;
+using GestorAppMotorola.Dtos;
+using GestorAppMotorola.Modelos;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -14,9 +16,12 @@ namespace GestorAppMotorola.Controllers
     public class TelefonoController : ControllerBase
     {
         private readonly ApplicationDBContext context;
-        public TelefonoController(ApplicationDBContext context)
+        private readonly IMapper mapper;
+
+        public TelefonoController(ApplicationDBContext context, IMapper mapper)
         {
             this.context = context;
+            this.mapper = mapper;
         }
 
         [HttpGet]
@@ -37,14 +42,16 @@ namespace GestorAppMotorola.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Post(Telefono telefono)
+        public async Task<ActionResult> Post(CreacionTelefonoDTO creacionTelefonoDTO)
         {
-            var telefonoOK = await context.Telefono.AnyAsync(x => x.Marca == telefono.Marca);
+            var telefonoOK = await context.Telefono.AnyAsync(x => x.Marca == creacionTelefonoDTO.Marca);
 
             if (telefonoOK)
             {
-                return BadRequest($"Ya existe un telefono de la marca {telefono.Marca}");
+                return BadRequest($"Ya existe un telefono de la marca {creacionTelefonoDTO.Marca}");
             }
+
+            var telefono = mapper.Map<Telefono>(creacionTelefonoDTO);
 
             context.Add(telefono);
             await context.SaveChangesAsync();

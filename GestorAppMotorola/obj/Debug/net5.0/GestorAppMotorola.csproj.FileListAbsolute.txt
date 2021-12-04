@@ -447,3 +447,5 @@ C:\Users\Usuario\Source\Repos\GestorAppMotorola\GestorAppMotorola\obj\Debug\net5
 C:\Users\Usuario\Source\Repos\GestorAppMotorola\GestorAppMotorola\obj\Debug\net5.0\ref\GestorAppMotorola.dll
 C:\Users\Usuario\Source\Repos\GestorAppMotorola\GestorAppMotorola\obj\Debug\net5.0\GestorAppMotorola.pdb
 C:\Users\Usuario\Source\Repos\GestorAppMotorola\GestorAppMotorola\obj\Debug\net5.0\GestorAppMotorola.genruntimeconfig.cache
+C:\Users\Usuario\Source\Repos\GestorAppMotorola\GestorAppMotorola\bin\Debug\net5.0\AutoMapper.dll
+C:\Users\Usuario\Source\Repos\GestorAppMotorola\GestorAppMotorola\bin\Debug\net5.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
