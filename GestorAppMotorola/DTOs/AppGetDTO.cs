@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace GestorAppMotorola.Modelos
+namespace GestorAppMotorola.DTOs
 {
-    public class operario
+    public class AppGetDTO
     {
         public int Id { get; set; }
         public string Nombre { get; set; }
-        public string Apellido { get; set; }
     }
 }

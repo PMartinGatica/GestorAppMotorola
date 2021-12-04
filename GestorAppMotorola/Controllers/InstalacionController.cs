@@ -1,4 +1,6 @@
-﻿using GestorAppMotorola.Modelos;
+﻿using AutoMapper;
+using GestorAppMotorola.DTOs;
+using GestorAppMotorola.Modelos;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -14,47 +16,46 @@ namespace GestorAppMotorola.Controllers
     public class InstalacionController : ControllerBase
     {
         private readonly ApplicationDBContext context;
+        private readonly IMapper mapper;
 
-        public InstalacionController(ApplicationDBContext context)
+        public InstalacionController(ApplicationDBContext context , IMapper mapper )
         {
             this.context = context;
+            this.mapper = mapper;
         }
 
         [HttpGet]
-
-        public async Task<ActionResult<List<Instalacion>>> Get()
+        public async Task<ActionResult<List<InstalacionGetDTO>>> Get()
         {
-            return await context.Instalacion.ToListAsync();
+            var inst = await context.operario.ToListAsync();
+            return mapper.Map<List<InstalacionGetDTO>>(inst);
         }
 
-        [HttpGet("{Id}")]
+        
 
-        public async Task<ActionResult<Instalacion>> Get(int id)
+        [HttpGet("{id}")]
+        public async Task<ActionResult<InstalacionGetDTO>> Get(int id)
         {
-            var inst = await context.Instalacion.FirstOrDefaultAsync(x => x.Id == id);
-            if (inst == null)
+            var oper = await context.Instalacion.FirstOrDefaultAsync(x => x.Id == id);
+
+            if (oper == null)
             {
-                return NotFound($"No existe Instalacion con la id {inst.Id}");
+                return NotFound();
             }
 
-            return inst;
+            return mapper.Map<InstalacionGetDTO>(oper);
         }
 
-        [HttpPost]
+        //[HttpPost]
 
-        public async Task<ActionResult> Post(Instalacion Instalacion)
-        {
-            ////var yaexiste = await context.Instalacion.AnyAsync(x => x.Nombre == Instalacion.Nombre);
+        //public async Task<ActionResult> Post(Instalacion Instalacion)
+        //{
 
-            ////if (yaexiste)
-            ////{
-            ////    return BadRequest($"Ya existe el nombre {Instalacion.Nombre}");
-            ////}
 
-            context.Add(Instalacion);
-            await context.SaveChangesAsync();
-            return Ok();
-        }
+        //    context.Add(Instalacion);
+        //    await context.SaveChangesAsync();
+        //    return Ok();
+        //}
 
         [HttpPut("{id}")]
 
@@ -62,14 +63,14 @@ namespace GestorAppMotorola.Controllers
         {
             if (Instalacion.Id != id)
             {
-                return BadRequest("El id del Operario no coincide con el id de la URL");
+                return BadRequest("El id de la instalacion no coincide con el id de la URL");
             }
 
             var yaexiste = await context.Instalacion.AnyAsync(x => x.Id == id);
 
             if (!yaexiste)
             {
-                return NotFound($"No existe el Operario con el id {Instalacion.Id}");
+                return NotFound($"No la instalacion con el id {Instalacion.Id}");
             }
 
             //context.Entry(Instalacion).State = EntityState.Modified;

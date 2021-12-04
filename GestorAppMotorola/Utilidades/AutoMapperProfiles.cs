@@ -12,7 +12,11 @@ namespace GestorAppMotorola.Utilidades
     {
         public AutoMapperProfiles()
         {
-            CreateMap<OperarioCreacionDTO, Operario>();
+            CreateMap<OperarioCreacionDTO, operario>();
+            CreateMap<operario, OperarioGetDTO>();
+            CreateMap<AppCreacionDTO, App>();
+            CreateMap<App, AppGetDTO>();
+            CreateMap<Instalacion , InstalacionGetDTO>();
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿using GestorAppMotorola.Modelos;
+﻿using AutoMapper;
+using GestorAppMotorola.DTOs;
+using GestorAppMotorola.Modelos;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
@@ -12,44 +14,44 @@ namespace GestorAppMotorola.Controllers
 
     {
         private readonly ApplicationDBContext context;
+        private readonly IMapper mapper;
 
-        public AppController(ApplicationDBContext context)
+        public AppController(ApplicationDBContext context, IMapper mapper)
         {
             this.context = context;
+            this.mapper = mapper;
         }
 
         [HttpGet]
 
-        public async Task<ActionResult<List<App>>> Get()
+        public async Task<ActionResult<List<AppGetDTO>>> Get()
         {
-            return await context.App.ToListAsync();
+            var ap = await context.operario.ToListAsync();
+            return mapper.Map<List<AppGetDTO>>(ap);
         }
+
 
         [HttpGet("{Id}")]
 
-        public async Task<ActionResult<App>> Get(int id)
+        public async Task<ActionResult<AppGetDTO>> Get(int id)
         {
             var app = await context.App.FirstOrDefaultAsync(x => x.Id == id);
-            if (app == null)
-            {
-                return NotFound($"No existe una App con la id {app.Id}");
-            }
-
-            return app;
+            return mapper.Map<AppGetDTO>(app);
         }
 
         [HttpPost]
 
-        public async Task<ActionResult> Post(App App)
+        public async Task<ActionResult> Post(AppCreacionDTO appCreacionDTO)
         {
-            var yaexiste = await context.App.AnyAsync(x => x.Nombre == App.Nombre);
+            var yaexiste = await context.App.AnyAsync(x => x.Nombre == appCreacionDTO.Nombre);
 
             if (yaexiste)
             {
-                return BadRequest($"Ya existe una aplicacion con el nombre {App.Nombre}");
+                return BadRequest($"Ya existe una aplicacion con el nombre {appCreacionDTO.Nombre}");
             }
 
-            context.Add(App);
+            var ap = mapper.Map<App>(appCreacionDTO);
+            context.Add(ap);
             await context.SaveChangesAsync();
             return Ok();
         }

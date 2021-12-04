@@ -25,18 +25,34 @@ namespace GestorAppMotorola.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<Operario>>> Get()
+        public async Task<ActionResult<List<OperarioGetDTO>>> Get()
         {
-            return await context.operario.ToListAsync();
+            var oper = await context.operario.ToListAsync();
+            return mapper.Map<List<OperarioGetDTO>>(oper);
         }
 
         [HttpGet("{nombre}")]
-        public async Task<ActionResult<List<Operario>>> Get(string nombre)
+        public async Task<ActionResult<List<operario>>> Get(string nombre)
         {
             var operarios = await context.operario.Where(x => x.Nombre.Contains(nombre)).ToListAsync();
 
             return operarios;
         }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<OperarioGetDTO>> Get(int id)
+        {
+            var oper = await context.operario.FirstOrDefaultAsync(x => x.Id == id);
+
+            if (oper == null)
+            {
+                return NotFound();
+            }
+
+            return mapper.Map<OperarioGetDTO>(oper);
+        }
+
+
         [HttpPost]
 
         public async Task<ActionResult> Post(OperarioCreacionDTO operarioCreacionDTO)
@@ -48,7 +64,7 @@ namespace GestorAppMotorola.Controllers
                 return BadRequest($"Ya existe el nombre {operarioCreacionDTO.Nombre}");
             }
 
-            var operario = mapper.Map<Operario>(operarioCreacionDTO);
+            var operario = mapper.Map<operario>(operarioCreacionDTO);
 
             context.Add(operario);
             await context.SaveChangesAsync();
@@ -57,7 +73,7 @@ namespace GestorAppMotorola.Controllers
 
         [HttpPut("{id}")]
 
-        public async Task<ActionResult> Put(Operario operario, int id)
+        public async Task<ActionResult> Put(operario operario, int id)
         {
             if (operario.Id != id)
             {
@@ -88,7 +104,7 @@ namespace GestorAppMotorola.Controllers
                 return BadRequest();
             }
 
-            context.Remove(new Operario() { Id = id });
+            context.Remove(new operario() { Id = id });
             await context.SaveChangesAsync();
             return NoContent();
         }
