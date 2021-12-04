@@ -299,3 +299,5 @@ C:\Users\pgatica\Source\Repos\GestorAppMotorola\GestorAppMotorola\obj\Debug\net5
 C:\Users\pgatica\Source\Repos\GestorAppMotorola\GestorAppMotorola\obj\Debug\net5.0\GestorAppMotorola.genruntimeconfig.cache
 C:\Users\pgatica\Source\Repos\GestorAppMotorola\GestorAppMotorola\bin\Debug\net5.0\AutoMapper.dll
 C:\Users\pgatica\Source\Repos\GestorAppMotorola\GestorAppMotorola\bin\Debug\net5.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\Pablo\Source\Repos\GestorAppMotorola\GestorAppMotorola\bin\Debug\net5.0\AutoMapper.dll
+C:\Users\Pablo\Source\Repos\GestorAppMotorola\GestorAppMotorola\bin\Debug\net5.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll

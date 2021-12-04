@@ -26,7 +26,7 @@ namespace GestorAppMotorola.Controllers
 
         public async Task<ActionResult<List<AppGetDTO>>> Get()
         {
-            var ap = await context.operario.ToListAsync();
+            var ap = await context.App.ToListAsync();
             return mapper.Map<List<AppGetDTO>>(ap);
         }
 
@@ -35,7 +35,8 @@ namespace GestorAppMotorola.Controllers
 
         public async Task<ActionResult<AppGetDTO>> Get(int id)
         {
-            var app = await context.App.Include(x => x.Instalacion).FirstOrDefaultAsync(x => x.Id == id);
+            var app = await context.App
+                .Include(x => x.Instalacion).FirstOrDefaultAsync(x => x.Id == id);
             return mapper.Map<AppGetDTO>(app);
         }
 

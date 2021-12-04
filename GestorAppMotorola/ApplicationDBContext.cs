@@ -13,10 +13,13 @@ namespace GestorAppMotorola
         {
         }
 
-        public DbSet<Operario> operario { get; set; }
+        public DbSet<Operario> Operario { get; set; }
         public DbSet<App> App { get; set; }
         public DbSet<Instalacion> Instalacion { get; set; }
 
-
+        internal Task SaveChangesasync()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

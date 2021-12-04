@@ -16,6 +16,7 @@ namespace GestorAppMotorola.Utilidades
             CreateMap<Operario, OperarioGetDTO>();
             CreateMap<AppCreacionDTO, App>();
             CreateMap<App, AppGetDTO>();
+            CreateMap<InstalacionCreacionDTO, Instalacion>();
             CreateMap<Instalacion , InstalacionGetDTO>();
         }
     }

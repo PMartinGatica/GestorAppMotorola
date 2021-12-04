@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace GestorAppMotorola.Controllers
 {
-    [Route("api/1.0/[controller]")]
+    [Route("api/1.0/app/{AppId:int}/[controller]")]
     [ApiController]
     public class InstalacionController : ControllerBase
     {
@@ -25,37 +25,54 @@ namespace GestorAppMotorola.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<InstalacionGetDTO>>> Get()
+        public async Task<ActionResult<List<InstalacionGetDTO>>> Get(int AppId)
         {
-            var inst = await context.operario.ToListAsync();
-            return mapper.Map<List<InstalacionGetDTO>>(inst);
-        }
+            var existeApp = await context.App.AnyAsync(x => x.Id == AppId);
 
-        
-
-        [HttpGet("{id}")]
-        public async Task<ActionResult<InstalacionGetDTO>> Get(int id)
-        {
-            var oper = await context.Instalacion.FirstOrDefaultAsync(x => x.Id == id);
-
-            if (oper == null)
+            if (!existeApp)
             {
                 return NotFound();
             }
 
-            return mapper.Map<InstalacionGetDTO>(oper);
+            var instalacion = await context.Instalacion
+                .Where(x=>x.AppId==AppId).ToListAsync();
+
+            return mapper.Map<List<InstalacionGetDTO>>(instalacion);
         }
 
-        //[HttpPost]
+        
 
-        //public async Task<ActionResult> Post(Instalacion Instalacion)
+        //[HttpGet("{id}")]
+        //public async Task<ActionResult<InstalacionGetDTO>> Get(int id)
         //{
+        //    var oper = await context.Instalacion.FirstOrDefaultAsync(x => x.Id == id);
 
+        //    if (oper == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-        //    context.Add(Instalacion);
-        //    await context.SaveChangesAsync();
-        //    return Ok();
+        //    return mapper.Map<InstalacionGetDTO>(oper);
         //}
+
+        [HttpPost]
+
+        public async Task<ActionResult> Post(int AppId, InstalacionCreacionDTO instalacionCreacionDTO)
+        {
+
+            var existeApp = await context.App.AnyAsync(x => x.Id == AppId);
+
+            if (!existeApp)
+            {
+                return NotFound();
+            }
+
+            var instalacion = mapper.Map<Instalacion>(instalacionCreacionDTO);
+            instalacion.AppId = AppId;
+            context.Add(instalacion);
+            await context.SaveChangesAsync();
+            return Ok();
+        }
 
         [HttpPut("{id}")]
 

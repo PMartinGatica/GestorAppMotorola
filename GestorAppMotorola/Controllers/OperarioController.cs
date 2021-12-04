@@ -25,88 +25,110 @@ namespace GestorAppMotorola.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<OperarioGetDTO>>> Get()
+        public async Task<ActionResult<IEnumerable<OperarioGetDTO>>> GetOperario()
         {
-            var oper = await context.operario.ToListAsync();
+            var oper = await context.Operario.ToListAsync();
             return mapper.Map<List<OperarioGetDTO>>(oper);
         }
 
-        [HttpGet("{nombre}")]
-        public async Task<ActionResult<List<Operario>>> Get(string nombre)
-        {
-            var operarios = await context.operario.Where(x => x.Nombre.Contains(nombre)).ToListAsync();
+        //[HttpGet("{nombre}")]
+        //public async Task<ActionResult<List<Operario>>> Get(string nombre)
+        //{
+        //    var operarios = await context.operario.Where(x => x.Nombre.Contains(nombre)).ToListAsync();
 
-            return operarios;
-        }
+        //    return operarios;
+        //}
+
+        //[HttpGet("{id}")]
+        //public async Task<ActionResult<OperarioGetDTO>> GetOperario(int id)
+        //{
+        //    var oper = await context.operario.Include(x => x.Instalacion).FirstOrDefaultAsync(x => x.Id == id);
+
+        //    if (oper == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    return mapper.Map<OperarioGetDTO>(oper);
+        //}
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<OperarioGetDTO>> Get(int id)
+        public async Task<ActionResult<OperarioGetDTO>> GetOperario(int id)
         {
-            var oper = await context.operario.Include(x => x.instalacion).FirstOrDefaultAsync(x => x.Id == id);
+            var operario = await context.Operario.FindAsync(id);
 
-            if (oper == null)
+
+            if (operario == null)
             {
                 return NotFound();
             }
 
-            return mapper.Map<OperarioGetDTO>(oper);
+            return mapper.Map<OperarioGetDTO>(operario);
         }
 
 
         [HttpPost]
 
-        public async Task<ActionResult> Post(OperarioCreacionDTO operarioCreacionDTO)
+        public async Task<ActionResult<Operario>> PostOperario(OperarioCreacionDTO operarioCreacionDTO)
         {
-            var yaexiste = await context.operario.AnyAsync(x => x.Nombre == operarioCreacionDTO.Nombre);
-
-            if (yaexiste)
-            {
-                return BadRequest($"Ya existe el nombre {operarioCreacionDTO.Nombre}");
-            }
-
+            
             var operario = mapper.Map<Operario>(operarioCreacionDTO);
 
-            context.Add(operario);
+            context.Operario.Add(operario);
             await context.SaveChangesAsync();
-            return Ok();
+            return CreatedAtAction("GetOperacion", new { id = operario.Id }, operario);
         }
 
         [HttpPut("{id}")]
 
-        public async Task<ActionResult> Put(Operario operario, int id)
+        public async Task<ActionResult> PutOperacion(Operario operario, int id)
         {
             if (operario.Id != id)
             {
                 return BadRequest("El id del Operario no coincide con el id de la URL");
             }
 
-            var yaexiste = await context.operario.AnyAsync(x => x.Id == id);
+            context.Entry(operario).State = EntityState.Modified;
 
-            if (!yaexiste)
+            try
             {
-                return NotFound($"No existe el Operario con el id {operario.Id}");
+                await context.SaveChangesAsync();
             }
 
-            
-            context.Update(operario);
-            await context.SaveChangesAsync();
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!OperarioExiste(id))
+                {
+                    return NotFound($"No existe el Operario con el id {operario.Id}");
+                }
+
+                else
+                {
+                    throw;
+                }
+            }
             return NoContent();
         }
 
         [HttpDelete("{id}")]
 
-        public async Task<ActionResult> Delete(int id)
+        public async Task<ActionResult> DeleteOperario(int id)
         {
-            var yaexiste = await context.operario.AnyAsync(x => x.Id == id);
+            var operario = await context.Operario.FindAsync(id);
 
-            if (!yaexiste)
+            if (operario == null)
             {
-                return BadRequest();
+                return NotFound();
             }
 
-            context.Remove(new Operario() { Id = id });
+            context.Operario.Remove(operario);
             await context.SaveChangesAsync();
             return NoContent();
+        }
+
+        private bool OperarioExiste(int id)
+        {
+            return context.Operario.Any(x => x.Id == id);
         }
 
     }

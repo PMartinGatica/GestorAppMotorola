@@ -3,14 +3,16 @@ using System;
 using GestorAppMotorola;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace GestorAppMotorola.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    partial class ApplicationDBContextModelSnapshot : ModelSnapshot
+    [Migration("20211204195525_App")]
+    partial class App
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -61,9 +63,6 @@ namespace GestorAppMotorola.Migrations
                     b.Property<DateTime>("Fecha")
                         .HasColumnType("datetime");
 
-                    b.Property<int>("OperarioId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.ToTable("Instalacion");
@@ -81,24 +80,14 @@ namespace GestorAppMotorola.Migrations
                     b.Property<string>("Nombre")
                         .HasColumnType("text");
 
+                    b.Property<int?>("instalacionId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
+                    b.HasIndex("instalacionId");
+
                     b.ToTable("operario");
-                });
-
-            modelBuilder.Entity("InstalacionOperario", b =>
-                {
-                    b.Property<int>("InstalacionId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("OperarioId")
-                        .HasColumnType("int");
-
-                    b.HasKey("InstalacionId", "OperarioId");
-
-                    b.HasIndex("OperarioId");
-
-                    b.ToTable("InstalacionOperario");
                 });
 
             modelBuilder.Entity("AppInstalacion", b =>
@@ -116,19 +105,13 @@ namespace GestorAppMotorola.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("InstalacionOperario", b =>
+            modelBuilder.Entity("GestorAppMotorola.Modelos.Operario", b =>
                 {
-                    b.HasOne("GestorAppMotorola.Modelos.Instalacion", null)
+                    b.HasOne("GestorAppMotorola.Modelos.Instalacion", "instalacion")
                         .WithMany()
-                        .HasForeignKey("InstalacionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("instalacionId");
 
-                    b.HasOne("GestorAppMotorola.Modelos.Operario", null)
-                        .WithMany()
-                        .HasForeignKey("OperarioId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Navigation("instalacion");
                 });
 #pragma warning restore 612, 618
         }
