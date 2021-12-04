@@ -44,11 +44,11 @@ namespace GestorAppMotorola.Controllers
         [HttpPost]
         public async Task<ActionResult> Post(CreacionTelefonoDTO creacionTelefonoDTO)
         {
-            var telefonoOK = await context.Telefono.AnyAsync(x => x.Marca == creacionTelefonoDTO.Marca);
+            var telefonoOK = await context.Telefono.AnyAsync(x => x.Modelo == creacionTelefonoDTO.Modelo);
 
             if (telefonoOK)
             {
-                return BadRequest($"Ya existe un telefono de la marca {creacionTelefonoDTO.Marca}");
+                return BadRequest($"Ya existe un telefono de la marca {creacionTelefonoDTO.Modelo}");
             }
 
             var telefono = mapper.Map<Telefono>(creacionTelefonoDTO);
