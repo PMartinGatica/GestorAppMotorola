@@ -13,6 +13,7 @@ namespace GestorAppMotorola.Utilidades
         public AutoMapperProfiles()
         {
             CreateMap<CreacionTelefonoDTO, Telefono>();
+            CreateMap<CreacionSensorDTO, Sensor>();
         }
     }
 }

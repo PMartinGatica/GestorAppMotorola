@@ -1,4 +1,6 @@
-﻿using GestorAppMotorola.Modelos;
+﻿using AutoMapper;
+using GestorAppMotorola.Dtos;
+using GestorAppMotorola.Modelos;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -13,9 +15,12 @@ namespace GestorAppMotorola.Controllers
     public class SensorController : ControllerBase
     {
         private readonly ApplicationDBContext context;
-        public SensorController(ApplicationDBContext context)
+        private readonly IMapper mapper;
+
+        public SensorController(ApplicationDBContext context, IMapper mapper)
         {
             this.context = context;
+            this.mapper = mapper;
         }
 
         [HttpGet]
@@ -36,14 +41,16 @@ namespace GestorAppMotorola.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Post(Sensor sensor)
+        public async Task<ActionResult> Post(CreacionSensorDTO creacionSensorDTO)
         {
-            var sensorOK = await context.Sensor.AnyAsync(x => x.Nombre == sensor.Nombre);
+            var sensorOK = await context.Sensor.AnyAsync(x => x.Nombre == creacionSensorDTO.Nombre);
 
             if (sensorOK)
             {
-                return BadRequest($"No existe un sensor con el nombre {sensor.Nombre}");
+                return BadRequest($"Ya existe un sensor con el nombre {creacionSensorDTO.Nombre}");
             }
+
+            var sensor = mapper.Map<Sensor>(creacionSensorDTO);
 
             context.Add(sensor);
             await context.SaveChangesAsync();

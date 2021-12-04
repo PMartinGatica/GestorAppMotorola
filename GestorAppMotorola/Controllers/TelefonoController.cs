@@ -48,7 +48,7 @@ namespace GestorAppMotorola.Controllers
 
             if (telefonoOK)
             {
-                return BadRequest($"Ya existe un telefono de la marca {creacionTelefonoDTO.Modelo}");
+                return BadRequest($"Ya existe un telefono moodelo {creacionTelefonoDTO.Modelo}");
             }
 
             var telefono = mapper.Map<Telefono>(creacionTelefonoDTO);
