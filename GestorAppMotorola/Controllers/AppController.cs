@@ -77,7 +77,7 @@ namespace GestorAppMotorola.Controllers
             {
                 if (!AppExiste(id))
                 {
-                    return NotFound($"No existe la APP con el id {app.Id}");
+                    return NotFound(/*$"No existe la APP con el id {app.Id}"*/);
                 }
 
                 else

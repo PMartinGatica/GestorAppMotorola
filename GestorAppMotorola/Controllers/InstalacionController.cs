@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace GestorAppMotorola.Controllers
 {
-    [Route("api/1.0/app/{AppId:int}/[controller]")]
+    [Route("api/1.0/[controller]")]
     [ApiController]
     public class InstalacionController : ControllerBase
     {
@@ -25,91 +25,91 @@ namespace GestorAppMotorola.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<InstalacionGetDTO>>> Get(int AppId)
+        public async Task<ActionResult<IEnumerable<InstalacionGetDTO>>> GetInstalacion()
         {
-            var existeApp = await context.App.AnyAsync(x => x.Id == AppId);
 
-            if (!existeApp)
-            {
-                return NotFound();
-            }
-
-            var instalacion = await context.Instalacion
-                .Where(x=>x.AppId==AppId).ToListAsync();
-
+            var instalacion = await context.Instalacion.ToListAsync();
             return mapper.Map<List<InstalacionGetDTO>>(instalacion);
         }
 
         
 
-        //[HttpGet("{id}")]
-        //public async Task<ActionResult<InstalacionGetDTO>> Get(int id)
-        //{
-        //    var oper = await context.Instalacion.FirstOrDefaultAsync(x => x.Id == id);
+        [HttpGet("{id}")]
+        public async Task<ActionResult<InstalacionGetDTO>> GetInstalacion(int id)
+        {
+           var instalar = await context.Instalacion.FindAsync(id);
 
-        //    if (oper == null)
-        //    {
-        //        return NotFound();
-        //    }
+           if (instalar == null)
+           {
+               return NotFound();
+          }
 
-        //    return mapper.Map<InstalacionGetDTO>(oper);
-        //}
+            return mapper.Map<InstalacionGetDTO>(instalar);
+        }
 
         [HttpPost]
 
-        public async Task<ActionResult> Post(int AppId, InstalacionCreacionDTO instalacionCreacionDTO)
-        {
+        public async Task<ActionResult<Instalacion>> PostInstalacion(InstalacionCreacionDTO instalacionCreacionDTO)
+        {            
 
-            var existeApp = await context.App.AnyAsync(x => x.Id == AppId);
 
-            if (!existeApp)
-            {
-                return NotFound();
-            }
-
-            var instalacion = mapper.Map<Instalacion>(instalacionCreacionDTO);
-            instalacion.AppId = AppId;
-            context.Add(instalacion);
+            var instalar = mapper.Map<Instalacion>(instalacionCreacionDTO);
+            context.Instalacion.Add(instalar);
             await context.SaveChangesAsync();
-            return Ok();
+            return CreatedAtAction("GetOferta", new {id=instalar.Id },instalar);
         }
 
         [HttpPut("{id}")]
 
-        public async Task<ActionResult> Put(Instalacion Instalacion, int id)
+        public async Task<ActionResult> PutInstalar(Instalacion Instalacion, int id)
         {
             if (Instalacion.Id != id)
             {
                 return BadRequest("El id de la instalacion no coincide con el id de la URL");
             }
 
-            var yaexiste = await context.Instalacion.AnyAsync(x => x.Id == id);
+            context.Entry(Instalacion).State = EntityState.Modified;
 
-            if (!yaexiste)
+            try
             {
-                return NotFound($"No la instalacion con el id {Instalacion.Id}");
+                await context.SaveChangesAsync();
             }
-
-            //context.Entry(Instalacion).State = EntityState.Modified;
-            context.Update(Instalacion);
-            await context.SaveChangesAsync();
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!InstalacionExiste(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+            
+            
+                
             return NoContent();
         }
 
         [HttpDelete("{id}")]
 
-        public async Task<ActionResult> Delete(int id)
+        public async Task<IActionResult> DeleteInstalacion(int id)
         {
-            var yaexiste = await context.Instalacion.AnyAsync(x => x.Id == id);
+            var instalar = await context.Instalacion.FindAsync(id);
 
-            if (!yaexiste)
+            if (instalar==null)
             {
-                return BadRequest();
+                return NotFound();
             }
 
-            context.Remove(new Instalacion() { Id = id });
+            context.Instalacion.Remove(instalar);
             await context.SaveChangesAsync();
             return NoContent();
+        }
+
+        private bool InstalacionExiste(int id)
+        {
+            return context.Instalacion.Any(e => e.Id == id);
         }
 
 

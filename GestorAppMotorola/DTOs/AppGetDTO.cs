@@ -11,7 +11,7 @@ namespace GestorAppMotorola.DTOs
         public int Id { get; set; }
         public string Nombre { get; set; }
 
-        public List<InstalacionGetDTO> Instalaciones { get; set; }
+        public virtual ICollection<InstalacionGetDTO> Instalaciones { get; set; }
 
     }
 }
