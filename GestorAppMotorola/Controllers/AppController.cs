@@ -4,6 +4,7 @@ using GestorAppMotorola.Modelos;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace GestorAppMotorola.Controllers
@@ -23,76 +24,90 @@ namespace GestorAppMotorola.Controllers
         }
 
         [HttpGet]
-
-        public async Task<ActionResult<List<AppGetDTO>>> Get()
+        public async Task<ActionResult<IEnumerable<AppGetDTO>>> GetApp()
         {
-            var ap = await context.App.ToListAsync();
-            return mapper.Map<List<AppGetDTO>>(ap);
+            var app = await context.App.ToListAsync();
+            return mapper.Map<List<AppGetDTO>>(app);
         }
 
 
-        [HttpGet("{Id}")]
-
-        public async Task<ActionResult<AppGetDTO>> Get(int id)
+        [HttpGet("{id}")]
+        public async Task<ActionResult<AppGetDTO>> GetApp(int id)
         {
-            var app = await context.App
-                .Include(x => x.Instalacion).FirstOrDefaultAsync(x => x.Id == id);
+            var app = await context.App.FindAsync(id);
+
+
+            if (app == null)
+            {
+                return NotFound();
+            }
+
             return mapper.Map<AppGetDTO>(app);
         }
 
         [HttpPost]
 
-        public async Task<ActionResult> Post(AppCreacionDTO appCreacionDTO)
+        public async Task<ActionResult<App>> PostApp(AppCreacionDTO appCreacionDTO)
         {
-            var yaexiste = await context.App.AnyAsync(x => x.Nombre == appCreacionDTO.Nombre);
 
-            if (yaexiste)
-            {
-                return BadRequest($"Ya existe una aplicacion con el nombre {appCreacionDTO.Nombre}");
-            }
+            var app = mapper.Map<App>(appCreacionDTO);
 
-            var ap = mapper.Map<App>(appCreacionDTO);
-            context.Add(ap);
+            context.App.Add(app);
             await context.SaveChangesAsync();
-            return Ok();
+            return CreatedAtAction("GetApp", new { id = app.Id }, app);
         }
 
         [HttpPut("{id}")]
 
-        public async Task<ActionResult> Put(App App, int id)
+        public async Task<ActionResult> PutApp(App app, int id)
         {
-            if (App.Id != id)
+            if (app.Id != id)
             {
-                return BadRequest("El id de la APP no coincide con el id de la URL");
+                return BadRequest("El id de la App no coincide con el id de la URL");
             }
 
-            var yaexiste = await context.App.AnyAsync(x => x.Id == id);
+            context.Entry(app).State = EntityState.Modified;
 
-            if (!yaexiste)
+            try
             {
-                return NotFound($"No existe el APP con el id {App.Id}");
+                await context.SaveChangesAsync();
             }
 
-            //context.Entry(App).State = EntityState.Modified;
-            context.Update(App);
-            await context.SaveChangesAsync();
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!AppExiste(id))
+                {
+                    return NotFound($"No existe la APP con el id {app.Id}");
+                }
+
+                else
+                {
+                    throw;
+                }
+            }
             return NoContent();
         }
 
         [HttpDelete("{id}")]
 
-        public async Task<ActionResult> Delete(int id)
+        public async Task<ActionResult> DeleteAPP(int id)
         {
-            var yaexiste = await context.App.AnyAsync(x => x.Id == id);
+            var app = await context.App.FindAsync(id);
 
-            if (!yaexiste)
+            if (app == null)
             {
-                return BadRequest();
+                return NotFound();
             }
 
-            context.Remove(new App() { Id = id });
+            context.App.Remove(app);
             await context.SaveChangesAsync();
             return NoContent();
         }
+
+        private bool AppExiste(int id)
+        {
+            return context.App.Any(x => x.Id == id);
+        }
+
     }
 }

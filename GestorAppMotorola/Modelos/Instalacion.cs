@@ -17,10 +17,10 @@ namespace GestorAppMotorola.Modelos
         public int OperarioId { get; set; }
 
 
-        // public List<Operario> operarios { get; set; }
-        public List<App>App{ get; set; }
+       
+        public virtual App App{ get; set; }
 
-        public List<Operario> Operario { get; set; }
+        public virtual Operario  Operario { get; set; }
 
 
     }
