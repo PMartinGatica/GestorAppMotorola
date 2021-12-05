@@ -15,7 +15,7 @@ namespace GestorAppMotorola.Controllers
     public class SensorController : ControllerBase
     {
         private readonly ApplicationDBContext context;
-        private readonly IMapper mapper;
+        private readonly IMapper mapper; 
 
         public SensorController(ApplicationDBContext context, IMapper mapper)
         {
@@ -24,13 +24,14 @@ namespace GestorAppMotorola.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<Sensor>>> Get()
+        public async Task<ActionResult<List<SensorDTO>>> Get()
         {
-            return await context.Sensor.ToListAsync();
+            var sensores = await context.Sensor.ToListAsync();
+            return mapper.Map<List<SensorDTO>>(sensores);
         }
 
         [HttpGet ("{id}")]
-        public async Task<ActionResult<Sensor>> Get(int id)
+        public async Task<ActionResult<SensorDTO>> Get(int id)
         {
            var sensorOK = await context.Sensor.FirstOrDefaultAsync(x => x.Id == id);
 
@@ -38,7 +39,8 @@ namespace GestorAppMotorola.Controllers
             {
                 return NotFound($"No existe el sensor con ID: {sensorOK.Id}");
             }
-            return sensorOK;
+
+            return mapper.Map<SensorDTO>(sensorOK);
         }
 
         [HttpPost]

@@ -25,21 +25,30 @@ namespace GestorAppMotorola.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<Telefono>>> Get()
+        public async Task<ActionResult<List<TelefonoDTO>>> GetAll()
         {
-            return await context.Telefono.ToListAsync();
+            var telefonos = await context.Telefono.ToListAsync();
+            return mapper.Map<List<TelefonoDTO>>(telefonos);
         }
 
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Telefono>> Get(int id)
+        [HttpGet("{id:int}")]
+        public async Task<ActionResult<TelefonoDTO>> GetByID(int id)
         {
-            var telefonoOK = await context.Telefono.FirstOrDefaultAsync(x => x.Id == id);
+            var telefono = await context.Telefono.FirstOrDefaultAsync(x => x.Id == id);
 
-            if (telefonoOK == null)
+            if (telefono == null)
             {
-                return NotFound($"No existe el telefono con ID : {telefonoOK.Id}");
+                return NotFound($"No existe el telefono con ID : {telefono.Id}");
             }
-            return telefonoOK;
+            return mapper.Map<TelefonoDTO>(telefono);
+        }
+
+        [HttpGet("{modelo}")]
+        public async Task<ActionResult<List<TelefonoDTO>>> GetByModelo([FromRoute] string modelo)
+        {
+            var modelos = await context.Telefono.Where(x => x.Modelo.Contains(modelo)).ToListAsync();
+
+            return mapper.Map<List<TelefonoDTO>>(modelos);
         }
 
         [HttpPost]
