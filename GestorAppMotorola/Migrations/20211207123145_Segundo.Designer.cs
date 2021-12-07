@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GestorAppMotorola.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20211204182755_conexiones")]
-    partial class conexiones
+    [Migration("20211207123145_Segundo")]
+    partial class Segundo
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -28,12 +28,7 @@ namespace GestorAppMotorola.Migrations
                     b.Property<string>("Nombre")
                         .HasColumnType("text");
 
-                    b.Property<int?>("instalacionId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("instalacionId");
 
                     b.ToTable("App");
                 });
@@ -44,13 +39,23 @@ namespace GestorAppMotorola.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<int>("AppId")
+                        .HasColumnType("int");
+
                     b.Property<bool>("Exitosa")
                         .HasColumnType("tinyint(1)");
 
                     b.Property<DateTime>("Fecha")
                         .HasColumnType("datetime");
 
+                    b.Property<int>("OperarioId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("AppId");
+
+                    b.HasIndex("OperarioId");
 
                     b.ToTable("Instalacion");
                 });
@@ -67,39 +72,38 @@ namespace GestorAppMotorola.Migrations
                     b.Property<string>("Nombre")
                         .HasColumnType("text");
 
-                    b.Property<int?>("instalacionId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("instalacionId");
-
-                    b.ToTable("operario");
-                });
-
-            modelBuilder.Entity("GestorAppMotorola.Modelos.App", b =>
-                {
-                    b.HasOne("GestorAppMotorola.Modelos.Instalacion", "instalacion")
-                        .WithMany("apps")
-                        .HasForeignKey("instalacionId");
-
-                    b.Navigation("instalacion");
-                });
-
-            modelBuilder.Entity("GestorAppMotorola.Modelos.Operario", b =>
-                {
-                    b.HasOne("GestorAppMotorola.Modelos.Instalacion", "instalacion")
-                        .WithMany("operarios")
-                        .HasForeignKey("instalacionId");
-
-                    b.Navigation("instalacion");
+                    b.ToTable("Operario");
                 });
 
             modelBuilder.Entity("GestorAppMotorola.Modelos.Instalacion", b =>
                 {
-                    b.Navigation("apps");
+                    b.HasOne("GestorAppMotorola.Modelos.App", "App")
+                        .WithMany("Instalacion")
+                        .HasForeignKey("AppId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("operarios");
+                    b.HasOne("GestorAppMotorola.Modelos.Operario", "Operario")
+                        .WithMany("Instalacion")
+                        .HasForeignKey("OperarioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("App");
+
+                    b.Navigation("Operario");
+                });
+
+            modelBuilder.Entity("GestorAppMotorola.Modelos.App", b =>
+                {
+                    b.Navigation("Instalacion");
+                });
+
+            modelBuilder.Entity("GestorAppMotorola.Modelos.Operario", b =>
+                {
+                    b.Navigation("Instalacion");
                 });
 #pragma warning restore 612, 618
         }
