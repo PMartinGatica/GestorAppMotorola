@@ -7,12 +7,4 @@ build_property.PublishSingleFile =
 build_property.IncludeAllContentForSelfExtract = 
 build_property._SupportedPlatformList = Android,iOS,Linux,macOS,Windows
 build_property.RootNamespace = GestorAppMotorola
-<<<<<<< HEAD
-build_property.ProjectDir = C:\Users\pgatica\source\repos\GestorAppMotorola\GestorAppMotorola\
-=======
-<<<<<<< HEAD
-build_property.ProjectDir = C:\Users\Pablo\source\repos\GestorAppMotorola\GestorAppMotorola\
-=======
-build_property.ProjectDir = C:\Users\Usuario\Source\Repos\GestorAppMotorola\GestorAppMotorola\
->>>>>>> Parte 2 Sensores (crud OK)
->>>>>>> e5c59ea02245eda3dda2fab47f9377aafef7cd31
+build_property.ProjectDir = C:\Users\Pablo\Source\Repos\GestorAppMotorola\GestorAppMotorola\

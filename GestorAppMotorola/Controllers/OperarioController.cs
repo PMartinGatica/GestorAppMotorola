@@ -76,7 +76,7 @@ namespace GestorAppMotorola.Controllers
 
             context.Operario.Add(operario);
             await context.SaveChangesAsync();
-            return CreatedAtAction("GetOperacion", new { id = operario.Id }, operario);
+            return CreatedAtAction("GetOperario", new { id = operario.Id }, operario);
         }
 
         [HttpPut("{id}")]
