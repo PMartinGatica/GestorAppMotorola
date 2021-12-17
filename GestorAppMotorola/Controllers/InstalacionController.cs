@@ -56,7 +56,7 @@ namespace GestorAppMotorola.Controllers
             var instalar = mapper.Map<Instalacion>(instalacionCreacionDTO);
             context.Instalacion.Add(instalar);
             await context.SaveChangesAsync();
-            return CreatedAtAction("GetOferta", new {id=instalar.Id },instalar);
+            return CreatedAtAction("GetInstalacion", new {id=instalar.Id },instalar);
         }
 
         [HttpPut("{id}")]
