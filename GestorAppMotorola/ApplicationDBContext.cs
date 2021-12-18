@@ -17,6 +17,8 @@ namespace GestorAppMotorola
         public DbSet<App> App { get; set; }
         public DbSet<Instalacion> Instalacion { get; set; }
 
+        public DbSet<Telefono> Telefono { get; set; }
+
         internal Task SaveChangesasync()
         {
             throw new NotImplementedException();
