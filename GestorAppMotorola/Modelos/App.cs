@@ -8,10 +8,10 @@ namespace GestorAppMotorola.Modelos
 {
     public class App
     {
-        public int Id { get; set; }
+        public int AppId { get; set; }
         public string Nombre { get; set; }
 
-        public virtual ICollection<Instalacion> Instalacion { get; set; }
+        //public  List<Instalacion> Instalacion { get; set; }
 
     }
 }

@@ -55,7 +55,7 @@ namespace GestorAppMotorola.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<OperarioGetDTO>> GetOperario(int id)
         {
-            var operario = await context.Operario.FindAsync(id);
+            var operario = await context.Operario.FirstOrDefaultAsync(x => x.OperarioId == id);
 
 
             if (operario == null)
@@ -76,14 +76,14 @@ namespace GestorAppMotorola.Controllers
 
             context.Operario.Add(operario);
             await context.SaveChangesAsync();
-            return CreatedAtAction("GetOperario", new { id = operario.Id }, operario);
+            return CreatedAtAction("GetOperario", new { id = operario.OperarioId }, operario);
         }
 
         [HttpPut("{id}")]
 
         public async Task<ActionResult> PutOperacion(Operario operario, int id)
         {
-            if (operario.Id != id)
+            if (operario.OperarioId != id)
             {
                 return BadRequest("El id del Operario no coincide con el id de la URL");
             }
@@ -99,7 +99,7 @@ namespace GestorAppMotorola.Controllers
             {
                 if (!OperarioExiste(id))
                 {
-                    return NotFound($"No existe el Operario con el id {operario.Id}");
+                    return NotFound($"No existe el Operario con el id {operario.OperarioId}");
                 }
 
                 else
@@ -128,7 +128,7 @@ namespace GestorAppMotorola.Controllers
 
         private bool OperarioExiste(int id)
         {
-            return context.Operario.Any(x => x.Id == id);
+            return context.Operario.Any(x => x.OperarioId == id);
         }
 
     }

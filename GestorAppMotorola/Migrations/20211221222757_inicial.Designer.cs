@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GestorAppMotorola.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20211207123145_Segundo")]
-    partial class Segundo
+    [Migration("20211221222757_inicial")]
+    partial class inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,21 +21,21 @@ namespace GestorAppMotorola.Migrations
 
             modelBuilder.Entity("GestorAppMotorola.Modelos.App", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("AppId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     b.Property<string>("Nombre")
                         .HasColumnType("text");
 
-                    b.HasKey("Id");
+                    b.HasKey("AppId");
 
                     b.ToTable("App");
                 });
 
             modelBuilder.Entity("GestorAppMotorola.Modelos.Instalacion", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("InstalacionId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
@@ -51,7 +51,7 @@ namespace GestorAppMotorola.Migrations
                     b.Property<int>("OperarioId")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.HasKey("InstalacionId");
 
                     b.HasIndex("AppId");
 
@@ -62,7 +62,7 @@ namespace GestorAppMotorola.Migrations
 
             modelBuilder.Entity("GestorAppMotorola.Modelos.Operario", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("OperarioId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
@@ -72,9 +72,43 @@ namespace GestorAppMotorola.Migrations
                     b.Property<string>("Nombre")
                         .HasColumnType("text");
 
-                    b.HasKey("Id");
+                    b.HasKey("OperarioId");
 
                     b.ToTable("Operario");
+                });
+
+            modelBuilder.Entity("GestorAppMotorola.Modelos.Sensor", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Nombre")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Sensor");
+                });
+
+            modelBuilder.Entity("GestorAppMotorola.Modelos.Telefono", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Marca")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Modelo")
+                        .HasColumnType("text");
+
+                    b.Property<float>("Precio")
+                        .HasColumnType("float");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Telefono");
                 });
 
             modelBuilder.Entity("GestorAppMotorola.Modelos.Instalacion", b =>

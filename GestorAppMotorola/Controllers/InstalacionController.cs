@@ -28,7 +28,7 @@ namespace GestorAppMotorola.Controllers
         public async Task<ActionResult<IEnumerable<InstalacionGetDTO>>> GetInstalacion()
         {
 
-            var instalacion = await context.Instalacion.ToListAsync();
+            var instalacion = await context.Instalacion.Include(x => x.Operario).Include(x => x.App).ToListAsync();
             return mapper.Map<List<InstalacionGetDTO>>(instalacion);
         }
 
@@ -37,7 +37,7 @@ namespace GestorAppMotorola.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<InstalacionGetDTO>> GetInstalacion(int id)
         {
-           var instalar = await context.Instalacion.FindAsync(id);
+           var instalar = await context.Instalacion.Include(x=>x.Operario).Include(x=>x.App).FirstOrDefaultAsync(x=>x.InstalacionId == id);
 
            if (instalar == null)
            {
@@ -56,14 +56,14 @@ namespace GestorAppMotorola.Controllers
             var instalar = mapper.Map<Instalacion>(instalacionCreacionDTO);
             context.Instalacion.Add(instalar);
             await context.SaveChangesAsync();
-            return CreatedAtAction("GetInstalacion", new {id=instalar.Id },instalar);
+            return CreatedAtAction("GetInstalacion", new {id=instalar.InstalacionId },instalar);
         }
 
         [HttpPut("{id}")]
 
         public async Task<ActionResult> PutInstalar(Instalacion Instalacion, int id)
         {
-            if (Instalacion.Id != id)
+            if (Instalacion.InstalacionId != id)
             {
                 return BadRequest("El id de la instalacion no coincide con el id de la URL");
             }
@@ -109,7 +109,7 @@ namespace GestorAppMotorola.Controllers
 
         private bool InstalacionExiste(int id)
         {
-            return context.Instalacion.Any(e => e.Id == id);
+            return context.Instalacion.Any(e => e.InstalacionId == id);
         }
 
 

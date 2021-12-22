@@ -28,7 +28,7 @@ namespace GestorAppMotorola
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddAutoMapper(typeof(Startup));
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
             services.AddDbContext<ApplicationDBContext>(opt => opt.UseMySQL("server=localhost;database=bbdd_motorola;user=root;password=root"));
             services.AddSwaggerGen(c =>
             {

@@ -7,10 +7,10 @@ namespace GestorAppMotorola.DTOs
 {
     public class OperarioGetDTO
     {
-        public int Id { get; set; }
+        public int OperarioId { get; set; }
         public string Nombre { get; set; }
         public string Apellido { get; set; }
 
-        public virtual ICollection<InstalacionGetDTO>Instalaciones { get; set; }
+        //public List<InstalacionGetDTO>Instalaciones { get; set; }
     }
 }

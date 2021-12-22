@@ -34,7 +34,7 @@ namespace GestorAppMotorola.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<AppGetDTO>> GetApp(int id)
         {
-            var app = await context.App.FindAsync(id);
+            var app = await context.App.FirstOrDefaultAsync(x=>x.AppId==id);
 
 
             if (app == null)
@@ -54,14 +54,14 @@ namespace GestorAppMotorola.Controllers
 
             context.App.Add(app);
             await context.SaveChangesAsync();
-            return CreatedAtAction("GetApp", new { id = app.Id }, app);
+            return CreatedAtAction("GetApp", new { id = app.AppId }, app);
         }
 
         [HttpPut("{id}")]
 
         public async Task<ActionResult> PutApp(App app, int id)
         {
-            if (app.Id != id)
+            if (app.AppId != id)
             {
                 return BadRequest("El id de la App no coincide con el id de la URL");
             }
@@ -106,7 +106,7 @@ namespace GestorAppMotorola.Controllers
 
         private bool AppExiste(int id)
         {
-            return context.App.Any(x => x.Id == id);
+            return context.App.Any(x => x.AppId == id);
         }
 
     }

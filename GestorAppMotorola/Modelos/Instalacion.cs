@@ -8,7 +8,7 @@ namespace GestorAppMotorola.Modelos
 {
     public class Instalacion
     {
-        public int Id { get; set; }
+        public int InstalacionId { get; set; }
         public Boolean Exitosa { get; set; }
         public DateTime Fecha { get; set; }
 
@@ -17,10 +17,10 @@ namespace GestorAppMotorola.Modelos
         public int OperarioId { get; set; }
 
 
-       
-        public virtual App App{ get; set; }
 
-        public virtual Operario  Operario { get; set; }
+        public  App App{ get; set; }
+
+        public  Operario  Operario { get; set; }
 
 
     }
