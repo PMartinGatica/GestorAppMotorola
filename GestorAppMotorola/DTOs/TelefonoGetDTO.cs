@@ -7,7 +7,7 @@ namespace GestorAppMotorola.DTOs
 {
     public class TelefonoGetDTO
     {
-        public int Id { get; set; }
+        public int TelefonoId { get; set; }
         public string Marca { get; set; }
         public string Modelo { get; set; }
         public float Precio { get; set; }

@@ -16,12 +16,14 @@ namespace GestorAppMotorola.DTOs
 
        public int OperarioId { get; set; }
 
+        public int TelefonoId { get; set; }
 
 
-       public App App { get; set; }
+        public App App { get; set; }
 
         public Operario Operario { get; set; }
 
+        public Telefono Telefono { get; set; }
 
     }
 }

@@ -49,11 +49,16 @@ namespace GestorAppMotorola.Migrations
                     b.Property<int>("OperarioId")
                         .HasColumnType("int");
 
+                    b.Property<int>("TelefonoId")
+                        .HasColumnType("int");
+
                     b.HasKey("InstalacionId");
 
                     b.HasIndex("AppId");
 
                     b.HasIndex("OperarioId");
+
+                    b.HasIndex("TelefonoId");
 
                     b.ToTable("Instalacion");
                 });
@@ -91,7 +96,7 @@ namespace GestorAppMotorola.Migrations
 
             modelBuilder.Entity("GestorAppMotorola.Modelos.Telefono", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("TelefonoId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
@@ -104,7 +109,7 @@ namespace GestorAppMotorola.Migrations
                     b.Property<float>("Precio")
                         .HasColumnType("float");
 
-                    b.HasKey("Id");
+                    b.HasKey("TelefonoId");
 
                     b.ToTable("Telefono");
                 });
@@ -112,30 +117,28 @@ namespace GestorAppMotorola.Migrations
             modelBuilder.Entity("GestorAppMotorola.Modelos.Instalacion", b =>
                 {
                     b.HasOne("GestorAppMotorola.Modelos.App", "App")
-                        .WithMany("Instalacion")
+                        .WithMany()
                         .HasForeignKey("AppId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("GestorAppMotorola.Modelos.Operario", "Operario")
-                        .WithMany("Instalacion")
+                        .WithMany()
                         .HasForeignKey("OperarioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("GestorAppMotorola.Modelos.Telefono", "Telefono")
+                        .WithMany()
+                        .HasForeignKey("TelefonoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("App");
 
                     b.Navigation("Operario");
-                });
 
-            modelBuilder.Entity("GestorAppMotorola.Modelos.App", b =>
-                {
-                    b.Navigation("Instalacion");
-                });
-
-            modelBuilder.Entity("GestorAppMotorola.Modelos.Operario", b =>
-                {
-                    b.Navigation("Instalacion");
+                    b.Navigation("Telefono");
                 });
 #pragma warning restore 612, 618
         }

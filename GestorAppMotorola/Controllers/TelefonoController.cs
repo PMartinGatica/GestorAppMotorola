@@ -76,14 +76,14 @@ namespace GestorAppMotorola.Controllers
 
             context.Telefono.Add(tel);
             await context.SaveChangesAsync();
-            return CreatedAtAction("GetTelefono", new { id = tel.Id }, tel);
+            return CreatedAtAction("GetTelefono", new { id = tel.TelefonoId }, tel);
         }
 
         [HttpPut("{id}")]
 
         public async Task<ActionResult> PutOperacion(Telefono Telefono, int id)
         {
-            if (Telefono.Id != id)
+            if (Telefono.TelefonoId != id)
             {
                 return BadRequest("El id del Telefono no coincide con el id de la URL");
             }
@@ -99,7 +99,7 @@ namespace GestorAppMotorola.Controllers
             {
                 if (!TelefonoExiste(id))
                 {
-                    return NotFound($"No existe el Telefono con el id {Telefono.Id}");
+                    return NotFound($"No existe el Telefono con el id {Telefono.TelefonoId}");
                 }
 
                 else
@@ -128,7 +128,7 @@ namespace GestorAppMotorola.Controllers
 
         private bool TelefonoExiste(int id)
         {
-            return context.Telefono.Any(x => x.Id == id);
+            return context.Telefono.Any(x => x.TelefonoId == id);
         }
 
     }
