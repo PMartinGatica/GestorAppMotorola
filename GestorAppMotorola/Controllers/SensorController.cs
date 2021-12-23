@@ -76,14 +76,14 @@ namespace GestorAppMotorola.Controllers
 
             context.Sensor.Add(sen);
             await context.SaveChangesAsync();
-            return CreatedAtAction("GetSensor", new { id = sen.Id }, sen);
+            return CreatedAtAction("GetSensor", new { id = sen.SensorId }, sen);
         }
 
         [HttpPut("{id}")]
 
         public async Task<ActionResult> PutOperacion(Sensor Sensor, int id)
         {
-            if (Sensor.Id != id)
+            if (Sensor.SensorId != id)
             {
                 return BadRequest("El id del Sensor no coincide con el id de la URL");
             }
@@ -99,7 +99,7 @@ namespace GestorAppMotorola.Controllers
             {
                 if (!SensorExiste(id))
                 {
-                    return NotFound($"No existe el Sensor con el id {Sensor.Id}");
+                    return NotFound($"No existe el Sensor con el id {Sensor.SensorId}");
                 }
 
                 else
@@ -128,7 +128,7 @@ namespace GestorAppMotorola.Controllers
 
         private bool SensorExiste(int id)
         {
-            return context.Sensor.Any(x => x.Id == id);
+            return context.Sensor.Any(x => x.SensorId == id);
         }
 
     }

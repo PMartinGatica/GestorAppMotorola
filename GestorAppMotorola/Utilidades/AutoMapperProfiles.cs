@@ -22,6 +22,7 @@ namespace GestorAppMotorola.Utilidades
             CreateMap<Sensor, SensorGetDTO>();
             CreateMap<TelefonoCreacionDTO, Telefono>();
             CreateMap<Telefono, TelefonoGetDTO>();
+
         }
     }
 }

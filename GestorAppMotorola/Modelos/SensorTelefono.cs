@@ -5,12 +5,13 @@ using System.Threading.Tasks;
 
 namespace GestorAppMotorola.Modelos
 {
-    public class Sensor
+    public class SensorTelefono
     {
         public int SensorId { get; set; }
-        public string Nombre { get; set; }
+        public int TelefonoId { get; set; }
+        public Sensor Sensor { get; set; }
+        public Telefono Telefono { get; set; }
 
-        public List <SensorTelefono>SensorTelefono { get; set; }
 
     }
 }

@@ -12,5 +12,7 @@ namespace GestorAppMotorola.Modelos
         public string Modelo { get; set; }
         public float Precio { get; set; }
 
+        public List <SensorTelefono>SensorTelefono { get; set; }
+
     }
 }
