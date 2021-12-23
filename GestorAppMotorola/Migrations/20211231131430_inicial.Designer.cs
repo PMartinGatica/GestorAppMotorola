@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GestorAppMotorola.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20211222231233_telefono")]
-    partial class telefono
+    [Migration("20211231131430_inicial")]
+    partial class inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -84,16 +84,31 @@ namespace GestorAppMotorola.Migrations
 
             modelBuilder.Entity("GestorAppMotorola.Modelos.Sensor", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("SensorId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     b.Property<string>("Nombre")
                         .HasColumnType("text");
 
-                    b.HasKey("Id");
+                    b.HasKey("SensorId");
 
                     b.ToTable("Sensor");
+                });
+
+            modelBuilder.Entity("GestorAppMotorola.Modelos.SensorTelefono", b =>
+                {
+                    b.Property<int>("SensorId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TelefonoId")
+                        .HasColumnType("int");
+
+                    b.HasKey("SensorId", "TelefonoId");
+
+                    b.HasIndex("TelefonoId");
+
+                    b.ToTable("SensorTelefono");
                 });
 
             modelBuilder.Entity("GestorAppMotorola.Modelos.Telefono", b =>
@@ -141,6 +156,35 @@ namespace GestorAppMotorola.Migrations
                     b.Navigation("Operario");
 
                     b.Navigation("Telefono");
+                });
+
+            modelBuilder.Entity("GestorAppMotorola.Modelos.SensorTelefono", b =>
+                {
+                    b.HasOne("GestorAppMotorola.Modelos.Sensor", "Sensor")
+                        .WithMany("SensorTelefono")
+                        .HasForeignKey("SensorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("GestorAppMotorola.Modelos.Telefono", "Telefono")
+                        .WithMany("SensorTelefono")
+                        .HasForeignKey("TelefonoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Sensor");
+
+                    b.Navigation("Telefono");
+                });
+
+            modelBuilder.Entity("GestorAppMotorola.Modelos.Sensor", b =>
+                {
+                    b.Navigation("SensorTelefono");
+                });
+
+            modelBuilder.Entity("GestorAppMotorola.Modelos.Telefono", b =>
+                {
+                    b.Navigation("SensorTelefono");
                 });
 #pragma warning restore 612, 618
         }

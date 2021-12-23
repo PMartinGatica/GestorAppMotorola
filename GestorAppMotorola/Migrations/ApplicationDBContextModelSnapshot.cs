@@ -82,14 +82,14 @@ namespace GestorAppMotorola.Migrations
 
             modelBuilder.Entity("GestorAppMotorola.Modelos.Sensor", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("SensorId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     b.Property<string>("Nombre")
                         .HasColumnType("text");
 
-                    b.HasKey("Id");
+                    b.HasKey("SensorId");
 
                     b.ToTable("Sensor");
                 });

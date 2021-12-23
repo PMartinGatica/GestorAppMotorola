@@ -11,5 +11,7 @@ namespace GestorAppMotorola.DTOs
         public string Marca { get; set; }
         public string Modelo { get; set; }
         public float Precio { get; set; }
+
+        public List<int> SensoresIds { get; set; }
     }
 }
