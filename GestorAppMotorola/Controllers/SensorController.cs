@@ -55,7 +55,7 @@ namespace GestorAppMotorola.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<SensorGetDTO>> GetSensor(int id)
         {
-            var sen = await context.Sensor.FindAsync(id);
+            var sen = await context.Sensor.FirstOrDefaultAsync(x=>x.SensorId==id);
 
 
             if (sen == null)

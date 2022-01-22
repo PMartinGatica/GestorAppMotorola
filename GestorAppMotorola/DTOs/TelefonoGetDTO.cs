@@ -11,8 +11,9 @@ namespace GestorAppMotorola.DTOs
         public string Marca { get; set; }
         public string Modelo { get; set; }
         public float Precio { get; set; }
+        //public List<SensorGetDTO> Sensor { get; set; }
 
-        public List<SensorGetDTO> Sensor { get; set; }
+        public virtual ICollection<SensorGetDTO> Sensor { get; set; }
 
     }
 }

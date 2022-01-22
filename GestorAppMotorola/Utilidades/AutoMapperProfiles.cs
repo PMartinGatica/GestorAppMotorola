@@ -36,7 +36,7 @@ namespace GestorAppMotorola.Utilidades
             {
                 resultado.Add(new SensorGetDTO()
                 {
-                    Id = sensortelefono.SensorId,
+                    SensorId = sensortelefono.SensorId,
                     Nombre = sensortelefono.Sensor.Nombre
                 });
             }

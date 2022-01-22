@@ -7,7 +7,7 @@ namespace GestorAppMotorola.DTOs
 {
     public class SensorCreacionDTO
     {
-        public int Id { get; set; }
+        public int SensorId { get; set; }
         public string Nombre { get; set; }
     }
 }
