@@ -34,7 +34,8 @@ namespace GestorAppMotorola.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<AppGetDTO>> GetApp(int id)
         {
-            var app = await context.App.FirstOrDefaultAsync(x=>x.AppId==id);
+            var app = await context.App
+                .Include(appdb=>appdb.Instalaciones).FirstOrDefaultAsync(x=>x.AppId==id);
 
 
             if (app == null)

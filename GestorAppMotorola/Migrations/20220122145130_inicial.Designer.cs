@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GestorAppMotorola.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20211223010000_SensorTelefono")]
-    partial class SensorTelefono
+    [Migration("20220122145130_inicial")]
+    partial class inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -84,14 +84,14 @@ namespace GestorAppMotorola.Migrations
 
             modelBuilder.Entity("GestorAppMotorola.Modelos.Sensor", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("SensorId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     b.Property<string>("Nombre")
                         .HasColumnType("text");
 
-                    b.HasKey("Id");
+                    b.HasKey("SensorId");
 
                     b.ToTable("Sensor");
                 });
@@ -146,7 +146,7 @@ namespace GestorAppMotorola.Migrations
                         .IsRequired();
 
                     b.HasOne("GestorAppMotorola.Modelos.Telefono", "Telefono")
-                        .WithMany()
+                        .WithMany("Instalacion")
                         .HasForeignKey("TelefonoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -184,6 +184,8 @@ namespace GestorAppMotorola.Migrations
 
             modelBuilder.Entity("GestorAppMotorola.Modelos.Telefono", b =>
                 {
+                    b.Navigation("Instalacion");
+
                     b.Navigation("SensorTelefono");
                 });
 #pragma warning restore 612, 618

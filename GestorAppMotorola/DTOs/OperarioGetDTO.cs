@@ -11,6 +11,6 @@ namespace GestorAppMotorola.DTOs
         public string Nombre { get; set; }
         public string Apellido { get; set; }
 
-        //public List<InstalacionGetDTO>Instalaciones { get; set; }
+        public List<InstalacionGetDTO>Instalaciones { get; set; }
     }
 }

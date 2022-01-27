@@ -27,5 +27,6 @@ namespace GestorAppMotorola.Modelos
         public Telefono Telefono { get; set; }
 
 
+
     }
 }

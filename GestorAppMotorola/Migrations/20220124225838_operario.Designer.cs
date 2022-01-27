@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GestorAppMotorola.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20211231131430_inicial")]
-    partial class inicial
+    [Migration("20220124225838_operario")]
+    partial class operario
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -134,13 +134,13 @@ namespace GestorAppMotorola.Migrations
             modelBuilder.Entity("GestorAppMotorola.Modelos.Instalacion", b =>
                 {
                     b.HasOne("GestorAppMotorola.Modelos.App", "App")
-                        .WithMany()
+                        .WithMany("Instalaciones")
                         .HasForeignKey("AppId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("GestorAppMotorola.Modelos.Operario", "Operario")
-                        .WithMany()
+                        .WithMany("Instalaciones")
                         .HasForeignKey("OperarioId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -175,6 +175,16 @@ namespace GestorAppMotorola.Migrations
                     b.Navigation("Sensor");
 
                     b.Navigation("Telefono");
+                });
+
+            modelBuilder.Entity("GestorAppMotorola.Modelos.App", b =>
+                {
+                    b.Navigation("Instalaciones");
+                });
+
+            modelBuilder.Entity("GestorAppMotorola.Modelos.Operario", b =>
+                {
+                    b.Navigation("Instalaciones");
                 });
 
             modelBuilder.Entity("GestorAppMotorola.Modelos.Sensor", b =>

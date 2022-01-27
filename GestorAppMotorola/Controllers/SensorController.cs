@@ -55,7 +55,11 @@ namespace GestorAppMotorola.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<SensorGetDTO>> GetSensor(int id)
         {
-            var sen = await context.Sensor.FirstOrDefaultAsync(x=>x.SensorId==id);
+            var sen = await context.Sensor
+                
+                .Include(telefonoDB => telefonoDB.SensorTelefono)
+                .ThenInclude(sensortelefonoDB => sensortelefonoDB.Sensor)
+                .FirstOrDefaultAsync(x=>x.SensorId==id);
 
 
             if (sen == null)
@@ -71,6 +75,17 @@ namespace GestorAppMotorola.Controllers
 
         public async Task<ActionResult<Sensor>> PostSensor(SensorCreacionDTO SensorCreacionDTO)
         {
+            if (SensorCreacionDTO.TelefonoIds == null)
+            {
+                return BadRequest("No se puede crear un sensores sin telefonos");
+            }
+            var telefonoIds = await context.Telefono.
+                Where(telefonodb => SensorCreacionDTO.TelefonoIds.Contains(telefonodb.TelefonoId)).Select(x => x.TelefonoId).ToListAsync();
+
+            if (SensorCreacionDTO.TelefonoIds.Count != telefonoIds.Count)
+            {
+                return BadRequest("No existe uno de los Sensores Eviados");
+            }
 
             var sen = mapper.Map<Sensor>(SensorCreacionDTO);
 

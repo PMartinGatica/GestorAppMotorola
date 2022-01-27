@@ -55,7 +55,8 @@ namespace GestorAppMotorola.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<OperarioGetDTO>> GetOperario(int id)
         {
-            var operario = await context.Operario.FirstOrDefaultAsync(x => x.OperarioId == id);
+            var operario = await context.Operario
+                .Include(dboperario=>dboperario.Instalaciones).FirstOrDefaultAsync(x => x.OperarioId == id);
 
 
             if (operario == null)

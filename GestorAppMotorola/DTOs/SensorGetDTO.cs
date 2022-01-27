@@ -1,4 +1,5 @@
-﻿using GestorAppMotorola.Migrations;
+﻿
+using GestorAppMotorola.Modelos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,8 @@ namespace GestorAppMotorola.DTOs
         public int SensorId { get; set; }
         public string Nombre { get; set; }
 
-        
+        public List<TelefonoGetDTO> Telefono { get; set; }
+
+
     }
 }

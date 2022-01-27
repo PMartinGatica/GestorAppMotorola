@@ -56,16 +56,13 @@ namespace GestorAppMotorola.Controllers
         public async Task<ActionResult<TelefonoGetDTO>> GetTelefono(int id)
         {
             var tel = await context.Telefono
+                .Include(dbtelefono => dbtelefono.Instalaciones)
                 .Include(telefonoDB => telefonoDB.SensorTelefono)
                 .ThenInclude(sensortelefonoDB => sensortelefonoDB.Sensor)
                 .FirstOrDefaultAsync(x => x.TelefonoId == id);
 
 
-            //if (tel == null)
-            //{
-            //    return NotFound();
-            //}
-
+            
             return mapper.Map<TelefonoGetDTO>(tel);
         }
 

@@ -3,14 +3,16 @@ using System;
 using GestorAppMotorola;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace GestorAppMotorola.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    partial class ApplicationDBContextModelSnapshot : ModelSnapshot
+    [Migration("20220123013836_app")]
+    partial class app
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -132,19 +134,19 @@ namespace GestorAppMotorola.Migrations
             modelBuilder.Entity("GestorAppMotorola.Modelos.Instalacion", b =>
                 {
                     b.HasOne("GestorAppMotorola.Modelos.App", "App")
-                        .WithMany("Instalaciones")
+                        .WithMany("Instalacion")
                         .HasForeignKey("AppId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("GestorAppMotorola.Modelos.Operario", "Operario")
-                        .WithMany("Instalaciones")
+                        .WithMany()
                         .HasForeignKey("OperarioId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("GestorAppMotorola.Modelos.Telefono", "Telefono")
-                        .WithMany("Instalaciones")
+                        .WithMany()
                         .HasForeignKey("TelefonoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -177,12 +179,7 @@ namespace GestorAppMotorola.Migrations
 
             modelBuilder.Entity("GestorAppMotorola.Modelos.App", b =>
                 {
-                    b.Navigation("Instalaciones");
-                });
-
-            modelBuilder.Entity("GestorAppMotorola.Modelos.Operario", b =>
-                {
-                    b.Navigation("Instalaciones");
+                    b.Navigation("Instalacion");
                 });
 
             modelBuilder.Entity("GestorAppMotorola.Modelos.Sensor", b =>
@@ -192,8 +189,6 @@ namespace GestorAppMotorola.Migrations
 
             modelBuilder.Entity("GestorAppMotorola.Modelos.Telefono", b =>
                 {
-                    b.Navigation("Instalaciones");
-
                     b.Navigation("SensorTelefono");
                 });
 #pragma warning restore 612, 618

@@ -28,7 +28,11 @@ namespace GestorAppMotorola.Controllers
         public async Task<ActionResult<IEnumerable<InstalacionGetDTO>>> GetInstalacion()
         {
 
-            var instalacion = await context.Instalacion.Include(x => x.Operario).Include(x => x.App).Include(x => x.Telefono).ToListAsync();
+            var instalacion = await context.Instalacion
+                .Include(x => x.Operario)
+                .Include(x => x.App)
+                .Include(x => x.Telefono).ToListAsync();
+
             return mapper.Map<List<InstalacionGetDTO>>(instalacion);
         }
 
@@ -37,7 +41,11 @@ namespace GestorAppMotorola.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<InstalacionGetDTO>> GetInstalacion(int id)
         {
-           var instalar = await context.Instalacion.Include(x=>x.Operario).Include(x=>x.App).Include(x => x.Telefono).FirstOrDefaultAsync(x=>x.InstalacionId == id);
+           var instalar = await context.Instalacion
+                .Include(x=>x.Operario)
+                .Include(x=>x.App)
+                .Include(x => x.Telefono)
+                .FirstOrDefaultAsync(x=>x.InstalacionId == id);
 
            if (instalar == null)
            {

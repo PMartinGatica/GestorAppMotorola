@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "wU0HN4ae5Q87cMkYiLFwveGiQ881ah+KNhsBhKWEQmw11me/7apiofYlR+6L1Zw5fnFbI2OSPgUwWwsvZtG/gA==",
+  "dgSpecHash": "hktl30H3PVi2ICnbOoJci5CR1/sAoklEdTm8sFB3nATs10d3hgYLIUIpk7U4r5Qkak4SG+e9xWu5Kf0lS5OVFQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Pablo\\Source\\Repos\\GestorAppMotorola\\GestorAppMotorola\\GestorAppMotorola.csproj",
+  "projectFilePath": "C:\\Users\\Pablo\\source\\repos\\GestorAppMotorola\\GestorAppMotorola\\GestorAppMotorola.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Pablo\\.nuget\\packages\\automapper\\10.1.1\\automapper.10.1.1.nupkg.sha512",
     "C:\\Users\\Pablo\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\8.1.1\\automapper.extensions.microsoft.dependencyinjection.8.1.1.nupkg.sha512",

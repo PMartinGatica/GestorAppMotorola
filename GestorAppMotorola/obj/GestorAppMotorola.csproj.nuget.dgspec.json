@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Pablo\\Source\\Repos\\GestorAppMotorola\\GestorAppMotorola\\GestorAppMotorola.csproj": {}
+    "C:\\Users\\Pablo\\source\\repos\\GestorAppMotorola\\GestorAppMotorola\\GestorAppMotorola.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Pablo\\Source\\Repos\\GestorAppMotorola\\GestorAppMotorola\\GestorAppMotorola.csproj": {
+    "C:\\Users\\Pablo\\source\\repos\\GestorAppMotorola\\GestorAppMotorola\\GestorAppMotorola.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Pablo\\Source\\Repos\\GestorAppMotorola\\GestorAppMotorola\\GestorAppMotorola.csproj",
+        "projectUniqueName": "C:\\Users\\Pablo\\source\\repos\\GestorAppMotorola\\GestorAppMotorola\\GestorAppMotorola.csproj",
         "projectName": "GestorAppMotorola",
-        "projectPath": "C:\\Users\\Pablo\\Source\\Repos\\GestorAppMotorola\\GestorAppMotorola\\GestorAppMotorola.csproj",
+        "projectPath": "C:\\Users\\Pablo\\source\\repos\\GestorAppMotorola\\GestorAppMotorola\\GestorAppMotorola.csproj",
         "packagesPath": "C:\\Users\\Pablo\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Pablo\\Source\\Repos\\GestorAppMotorola\\GestorAppMotorola\\obj\\",
+        "outputPath": "C:\\Users\\Pablo\\source\\repos\\GestorAppMotorola\\GestorAppMotorola\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",

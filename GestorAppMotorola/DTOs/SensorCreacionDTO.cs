@@ -9,5 +9,7 @@ namespace GestorAppMotorola.DTOs
     {
         public int SensorId { get; set; }
         public string Nombre { get; set; }
+
+        public List<int> TelefonoIds { get; set; }
     }
 }
