@@ -27,30 +27,15 @@ namespace GestorAppMotorola.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<TelefonoGetDTO>>> GetTelefono()
         {
-            var tel = await context.Telefono.ToListAsync();
+            var tel = await context.Telefono
+                .Include(dbtelefono => dbtelefono.Instalaciones)
+                .Include(telefonoDB => telefonoDB.SensorTelefono)
+                .ThenInclude(sensortelefonoDB => sensortelefonoDB.Sensor)
+                .ToListAsync();
             return mapper.Map<List<TelefonoGetDTO>>(tel);
         }
 
-        //[HttpGet("{nombre}")]
-        //public async Task<ActionResult<List<Telefono>>> Get(string nombre)
-        //{
-        //    var Telefonos = await context.Telefono.Where(x => x.Nombre.Contains(nombre)).ToListAsync();
-
-        //    return Telefonos;
-        //}
-
-        //[HttpGet("{id}")]
-        //public async Task<ActionResult<TelefonoGetDTO>> GetTelefono(int id)
-        //{
-        //    var oper = await context.Telefono.Include(x => x.Instalacion).FirstOrDefaultAsync(x => x.Id == id);
-
-        //    if (oper == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    return mapper.Map<TelefonoGetDTO>(oper);
-        //}
+        
 
         [HttpGet("{id}")]
         public async Task<ActionResult<TelefonoGetDTO>> GetTelefono(int id)

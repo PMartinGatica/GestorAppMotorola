@@ -58,7 +58,7 @@ namespace GestorAppMotorola.Controllers
             var sen = await context.Sensor
                 
                 .Include(telefonoDB => telefonoDB.SensorTelefono)
-                .ThenInclude(sensortelefonoDB => sensortelefonoDB.Sensor)
+                .ThenInclude(sensortelefonoDB => sensortelefonoDB.Telefono)
                 .FirstOrDefaultAsync(x=>x.SensorId==id);
 
 

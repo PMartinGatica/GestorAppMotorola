@@ -35,7 +35,7 @@ namespace GestorAppMotorola.Utilidades
 
             foreach (var telefonosensor in sensor.SensorTelefono)
             {
-             resultado.Add(new TelefonoGetDTO()
+            resultado.Add(new TelefonoGetDTO()
                 {
                     TelefonoId = telefonosensor.Telefono.TelefonoId,
                     Marca = telefonosensor.Telefono.Marca,
