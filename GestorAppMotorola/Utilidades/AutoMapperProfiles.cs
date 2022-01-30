@@ -18,13 +18,18 @@ namespace GestorAppMotorola.Utilidades
             CreateMap<App, AppGetDTO>();
             CreateMap<InstalacionCreacionDTO, Instalacion>();
             CreateMap<Instalacion , InstalacionGetDTO>();
-            CreateMap<SensorCreacionDTO,Sensor>();  
-            CreateMap<Sensor, SensorGetDTO>()
+            CreateMap<SensorCreacionDTO,Sensor>();
+            CreateMap<Sensor, SensorGetDTO>();
+                CreateMap<Sensor, SensorDTOConTelefonos>()
                   .ForMember(SensorGetDTO => SensorGetDTO.Telefono, opciones => opciones.MapFrom(MapSensorDTOTelefono));
             CreateMap<TelefonoCreacionDTO, Telefono>()
                 .ForMember(telefono => telefono.SensorTelefono, opciones => opciones.MapFrom(MapSensorTelefono));
-            CreateMap<Telefono, TelefonoGetDTO>()
+            CreateMap<Telefono, TelefonoGetDTO>();
+            CreateMap<Telefono, TelefonoGetDTOFiltro>();
+            CreateMap<Telefono, TelefonoGetDTOId>();
+            CreateMap<Telefono, TelefonoDTOConSensores>()
                 .ForMember(telefonoGetDTO => telefonoGetDTO.Sensor, opciones => opciones.MapFrom(MapTelefonoDTOSensor));
+            
         }
 
         private List<TelefonoGetDTO> MapSensorDTOTelefono(Sensor sensor, SensorGetDTO sensorGetDTO)
