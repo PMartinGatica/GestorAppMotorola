@@ -39,7 +39,7 @@ namespace GestorAppMotorola.Controllers
         
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<InstalacionGetDTO>> GetInstalacion(int id)
+        public async Task<ActionResult<InstalacionesDTOConTelefonos>> GetInstalacion(int id)
         {
            var instalar = await context.Instalacion
                 .Include(x=>x.Operario)
@@ -52,7 +52,7 @@ namespace GestorAppMotorola.Controllers
                return NotFound();
           }
 
-            return mapper.Map<InstalacionGetDTO>(instalar);
+            return mapper.Map<InstalacionesDTOConTelefonos>(instalar);
         }
 
         [HttpPost]

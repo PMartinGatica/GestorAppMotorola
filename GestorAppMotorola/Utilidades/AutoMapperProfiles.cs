@@ -14,10 +14,13 @@ namespace GestorAppMotorola.Utilidades
         {
             CreateMap<OperarioCreacionDTO, Operario>();
             CreateMap<Operario, OperarioGetDTO>();
+            CreateMap<Operario, OperarioDTOConInstalaciones>();
             CreateMap<AppCreacionDTO, App>();
+            CreateMap<App,AppDTOConInstalaciones>();
             CreateMap<App, AppGetDTO>();
             CreateMap<InstalacionCreacionDTO, Instalacion>();
             CreateMap<Instalacion , InstalacionGetDTO>();
+            CreateMap<Instalacion, InstalacionesDTOConTelefonos>();
             CreateMap<SensorCreacionDTO,Sensor>();
             CreateMap<Sensor, SensorGetDTO>();
                 CreateMap<Sensor, SensorDTOConTelefonos>()
@@ -25,8 +28,8 @@ namespace GestorAppMotorola.Utilidades
             CreateMap<TelefonoCreacionDTO, Telefono>()
                 .ForMember(telefono => telefono.SensorTelefono, opciones => opciones.MapFrom(MapSensorTelefono));
             CreateMap<Telefono, TelefonoGetDTO>();
-            CreateMap<Telefono, TelefonoGetDTOFiltro>();
             CreateMap<Telefono, TelefonoGetDTOId>();
+            CreateMap<Telefono, TelefonoDTOConInstalaciones>();
             CreateMap<Telefono, TelefonoDTOConSensores>()
                 .ForMember(telefonoGetDTO => telefonoGetDTO.Sensor, opciones => opciones.MapFrom(MapTelefonoDTOSensor));
             

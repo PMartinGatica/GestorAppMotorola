@@ -32,7 +32,7 @@ namespace GestorAppMotorola.Controllers
 
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<AppGetDTO>> GetApp(int id)
+        public async Task<ActionResult<AppDTOConInstalaciones>> GetApp(int id)
         {
             var app = await context.App
                 .Include(appdb=>appdb.Instalaciones).FirstOrDefaultAsync(x=>x.AppId==id);
@@ -43,7 +43,7 @@ namespace GestorAppMotorola.Controllers
                 return NotFound();
             }
 
-            return mapper.Map<AppGetDTO>(app);
+            return mapper.Map<AppDTOConInstalaciones>(app);
         }
 
         [HttpPost]

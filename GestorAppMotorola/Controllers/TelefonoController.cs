@@ -37,17 +37,17 @@ namespace GestorAppMotorola.Controllers
 
        
         [HttpGet("{id}")]
-        public async Task<ActionResult<TelefonoGetDTOId>> GetTelefono(int id)
+        public async Task<ActionResult<TelefonoDTOConInstalaciones>> GetTelefono(int id)
         {
             var tel = await context.Telefono
                 .Include(dbtelefono => dbtelefono.Instalaciones)
-                .Include(telefonoDB => telefonoDB.SensorTelefono)
-                .ThenInclude(sensortelefonoDB => sensortelefonoDB.Sensor)
+                //.Include(telefonoDB => telefonoDB.SensorTelefono)
+                //.ThenInclude(sensortelefonoDB => sensortelefonoDB.Sensor)
                 .FirstOrDefaultAsync(x => x.TelefonoId == id);
 
 
             
-            return mapper.Map<TelefonoGetDTOId>(tel);
+            return mapper.Map<TelefonoDTOConInstalaciones>(tel);
         }
 
 

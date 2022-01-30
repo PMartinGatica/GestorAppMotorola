@@ -31,29 +31,10 @@ namespace GestorAppMotorola.Controllers
             return mapper.Map<List<OperarioGetDTO>>(oper);
         }
 
-        //[HttpGet("{nombre}")]
-        //public async Task<ActionResult<List<Operario>>> Get(string nombre)
-        //{
-        //    var operarios = await context.operario.Where(x => x.Nombre.Contains(nombre)).ToListAsync();
-
-        //    return operarios;
-        //}
-
-        //[HttpGet("{id}")]
-        //public async Task<ActionResult<OperarioGetDTO>> GetOperario(int id)
-        //{
-        //    var oper = await context.operario.Include(x => x.Instalacion).FirstOrDefaultAsync(x => x.Id == id);
-
-        //    if (oper == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    return mapper.Map<OperarioGetDTO>(oper);
-        //}
+       
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<OperarioGetDTO>> GetOperario(int id)
+        public async Task<ActionResult<OperarioDTOConInstalaciones>> GetOperario(int id)
         {
             var operario = await context.Operario
                 .Include(dboperario=>dboperario.Instalaciones).FirstOrDefaultAsync(x => x.OperarioId == id);
@@ -64,7 +45,7 @@ namespace GestorAppMotorola.Controllers
                 return NotFound();
             }
 
-            return mapper.Map<OperarioGetDTO>(operario);
+            return mapper.Map<OperarioDTOConInstalaciones>(operario);
         }
 
 

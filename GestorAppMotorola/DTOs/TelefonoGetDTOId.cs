@@ -14,7 +14,7 @@ namespace GestorAppMotorola.DTOs
 
 
         //public virtual ICollection<SensorGetDTO> Sensor { get; set; }
-        public List<InstalacionGetDTO> Instalaciones { get; set; }
+        
 
 
     }
