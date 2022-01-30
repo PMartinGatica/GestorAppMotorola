@@ -18,7 +18,7 @@ namespace GestorAppMotorola.Controllers
         private readonly ApplicationDBContext context;
         private readonly IMapper mapper;
 
-        public InstalacionController(ApplicationDBContext context , IMapper mapper )
+        public InstalacionController(ApplicationDBContext context, IMapper mapper)
         {
             this.context = context;
             this.mapper = mapper;
@@ -34,6 +34,20 @@ namespace GestorAppMotorola.Controllers
                 .Include(x => x.Telefono).ToListAsync();
 
             return mapper.Map<List<InstalacionGetDTO>>(instalacion);
+        }
+
+        [HttpGet("instalacionOK")]
+        public dynamic instalacionOK(Boolean exitosa)
+        {
+            return context.Instalacion
+                .Where(item =>
+                    item.Exitosa == false
+                )
+                .Select(item => new {
+                    item.Exitosa,
+                    aplicacion = item.App.Nombre
+                })
+                .ToList();
         }
 
         
