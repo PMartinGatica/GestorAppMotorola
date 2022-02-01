@@ -24,10 +24,13 @@ namespace GestorAppMotorola.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<AppGetDTO>>> GetApp()
+        public async Task<ActionResult<IEnumerable<AppDTOConInstalaciones>>> GetApp()
         {
-            var app = await context.App.ToListAsync();
-            return mapper.Map<List<AppGetDTO>>(app);
+            var app = await context.App
+                .Include(x => x.Instalaciones)
+                .ToListAsync();
+
+            return mapper.Map<List<AppDTOConInstalaciones>>(app);
         }
 
 

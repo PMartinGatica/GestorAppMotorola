@@ -36,19 +36,18 @@ namespace GestorAppMotorola.Controllers
             return mapper.Map<List<InstalacionGetDTO>>(instalacion);
         }
 
-        [HttpGet("instalacionOK")]
-        public dynamic instalacionOK(Boolean exitosa)
-        {
-            return context.Instalacion
-                .Where(item =>
-                    item.Exitosa == false
-                )
-                .Select(item => new {
-                    item.Exitosa,
-                    aplicacion = item.App.Nombre
-                })
-                .ToList();
-        }
+        //[HttpGet("instalacionOK")]
+        //public dynamic instalacionOK(Boolean exitosa)
+        //{
+        //    return context.Instalacion
+        //        .Where(item =>
+        //            item.Exitosa == true )
+        //        .Select(item => new {
+        //            item.Exitosa,
+        //            aplicacion = item.App.Nombre
+        //        })
+        //        .ToList();
+        //}
 
         
 

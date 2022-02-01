@@ -7,6 +7,6 @@ namespace GestorAppMotorola.DTOs
 {
     public class AppDTOConInstalaciones:AppGetDTO
     {
-        public List<InstalacionesDTOConTelefonos> Instalaciones { get; set; }
+        public List<InstalacionesDTOConApp> Instalaciones { get; set; }
     }
 }

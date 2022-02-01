@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "hktl30H3PVi2ICnbOoJci5CR1/sAoklEdTm8sFB3nATs10d3hgYLIUIpk7U4r5Qkak4SG+e9xWu5Kf0lS5OVFQ==",
+  "dgSpecHash": "w5NbJWPpuEE8kbf05urS4R4IBDvk5fIrZz2YWfpEv1zMN88wgPiQr1ZVqiCU1TnTj5Dcp5EdInZUFLLuCeNCMg==",
   "success": true,
   "projectFilePath": "C:\\Users\\Pablo\\source\\repos\\GestorAppMotorola\\GestorAppMotorola\\GestorAppMotorola.csproj",
   "expectedPackageFiles": [
@@ -129,6 +129,7 @@
     "C:\\Users\\Pablo\\.nuget\\packages\\system.io.filesystem\\4.3.0\\system.io.filesystem.4.3.0.nupkg.sha512",
     "C:\\Users\\Pablo\\.nuget\\packages\\system.io.filesystem.primitives\\4.3.0\\system.io.filesystem.primitives.4.3.0.nupkg.sha512",
     "C:\\Users\\Pablo\\.nuget\\packages\\system.linq\\4.3.0\\system.linq.4.3.0.nupkg.sha512",
+    "C:\\Users\\Pablo\\.nuget\\packages\\system.linq.dynamic.core\\1.2.15\\system.linq.dynamic.core.1.2.15.nupkg.sha512",
     "C:\\Users\\Pablo\\.nuget\\packages\\system.linq.expressions\\4.3.0\\system.linq.expressions.4.3.0.nupkg.sha512",
     "C:\\Users\\Pablo\\.nuget\\packages\\system.memory\\4.5.4\\system.memory.4.5.4.nupkg.sha512",
     "C:\\Users\\Pablo\\.nuget\\packages\\system.net.http\\4.3.0\\system.net.http.4.3.0.nupkg.sha512",
