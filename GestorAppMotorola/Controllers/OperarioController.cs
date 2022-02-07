@@ -24,6 +24,11 @@ namespace GestorAppMotorola.Controllers
             this.mapper = mapper;
         }
 
+
+
+
+
+
         [HttpGet]
         public async Task<ActionResult<IEnumerable<OperarioGetDTO>>> GetOperario()
         {

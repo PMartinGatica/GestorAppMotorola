@@ -29,6 +29,7 @@ namespace GestorAppMotorola.Controllers
         {
             var tel = await context.Telefono
                 .Include(dbtelefono => dbtelefono.Instalaciones)
+                
                 .Include(telefonoDB => telefonoDB.SensorTelefono)
                 .ThenInclude(sensortelefonoDB => sensortelefonoDB.Sensor)
                 .ToListAsync();
@@ -40,7 +41,9 @@ namespace GestorAppMotorola.Controllers
         public async Task<ActionResult<TelefonoDTOConInstalaciones>> GetTelefono(int id)
         {
             var tel = await context.Telefono
-                .Include(dbtelefono => dbtelefono.Instalaciones)
+                .Include(dbtelefono => dbtelefono.Instalaciones).ThenInclude(x=>x.App)
+                .Include(dbtelefono => dbtelefono.Instalaciones).ThenInclude(x => x.Operario)
+             
                 //.Include(telefonoDB => telefonoDB.SensorTelefono)
                 //.ThenInclude(sensortelefonoDB => sensortelefonoDB.Sensor)
                 .FirstOrDefaultAsync(x => x.TelefonoId == id);

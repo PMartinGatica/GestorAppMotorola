@@ -13,9 +13,11 @@ namespace GestorAppMotorola.DTOs
         public string Modelo { get; set; }
         public float Precio { get; set; }
 
+      //  public List<InstalacionGetDTO> Instalaciones { get; set; }
+
 
         //public virtual ICollection<SensorGetDTO> Sensor { get; set; }
-       // public List<InstalacionGetDTO> Instalaciones { get; set; }
+      
 
 
     }

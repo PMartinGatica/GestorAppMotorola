@@ -8,5 +8,7 @@ namespace GestorAppMotorola.DTOs
     public class TelefonoDTOConSensores:TelefonoGetDTO
     {
         public List<SensorGetDTO> Sensor { get; set; }
+
+        
     }
 }
