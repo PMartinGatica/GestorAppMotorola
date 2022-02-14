@@ -29,14 +29,19 @@ namespace GestorAppMotorola.Controllers
         {
             var tel = await context.Telefono
                 .Include(dbtelefono => dbtelefono.Instalaciones)
-                
+
+                .ThenInclude(dbapp=>dbapp.App)
                 .Include(telefonoDB => telefonoDB.SensorTelefono)
                 .ThenInclude(sensortelefonoDB => sensortelefonoDB.Sensor)
+
                 .ToListAsync();
             return mapper.Map<List<TelefonoDTOConSensores>>(tel);
         }
 
-       
+        
+        
+
+
         [HttpGet("{id}")]
         public async Task<ActionResult<TelefonoDTOConInstalaciones>> GetTelefono(int id)
         {

@@ -9,6 +9,6 @@ namespace GestorAppMotorola.DTOs
     {
         public List<SensorGetDTO> Sensor { get; set; }
 
-        
+      
     }
 }

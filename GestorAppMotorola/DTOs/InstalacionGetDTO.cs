@@ -9,6 +9,8 @@ namespace GestorAppMotorola.DTOs
     public class InstalacionGetDTO
     {
         //public int InstalacionId { get; set; }
+
+        public AppGetDTO App { get; set; }
         public Boolean Exitosa { get; set; }
         //public DateTime Fecha { get; set; }
 
