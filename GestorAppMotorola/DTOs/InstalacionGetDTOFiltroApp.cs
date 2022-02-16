@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace GestorAppMotorola.DTOs
 {
-    public class InstalacionGetDTO
+    public class InstalacionGetDTOFiltroApp
     {
         //public int InstalacionId { get; set; }
 
         public AppGetDTO App { get; set; }
         public Boolean Exitosa { get; set; }
-        public DateTime Fecha { get; set; }
+        //public DateTime Fecha { get; set; }
 
         
 

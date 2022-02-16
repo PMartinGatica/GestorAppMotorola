@@ -24,6 +24,7 @@ namespace GestorAppMotorola.Controllers
             this.mapper = mapper;
         }
 
+
         [HttpGet]
         public async Task<ActionResult<IEnumerable<InstalacionGetDTO>>> GetInstalacion()
         {
@@ -36,20 +37,39 @@ namespace GestorAppMotorola.Controllers
             return mapper.Map<List<InstalacionGetDTO>>(instalacion);
         }
 
-        //[HttpGet("instalacionOK")]
-        //public dynamic instalacionOK(Boolean exitosa)
-        //{
-        //    return context.Instalacion
-        //        .Where(item =>
-        //            item.Exitosa == true )
-        //        .Select(item => new {
-        //            item.Exitosa,
-        //            aplicacion = item.App.Nombre
-        //        })
-        //        .ToList();
-        //}
+        [HttpGet("Filtro_App")]
+        public async Task<ActionResult<IEnumerable<InstalacionGetDTOFiltroApp>>> GetFiltro_App()
+        {
 
-        
+            var instalacion = await context.Instalacion
+                .Include(x => x.Operario)
+                .Include(x => x.App)
+                .Include(x => x.Telefono).ToListAsync();
+
+            return mapper.Map<List<InstalacionGetDTOFiltroApp>>(instalacion);
+        }
+
+        [HttpGet("instalaciondiaria")]
+        public dynamic instalaciondiaria(DateTime fecha)
+        {
+            fecha = fecha.Date;
+
+            return
+                context.Instalacion
+                .Where(item => item.Fecha.Date == fecha && item.Exitosa == true)
+                .Select(item => new
+                {
+                    fecha = item.Fecha.Date.ToShortDateString(),
+                    nombre_operario=item.Operario.Nombre,
+                    apellido_operarios=item.Operario.Apellido,
+
+                    app_intaladas=item.Operario.Instalaciones.Where(x=>x.Exitosa==true).Count()
+
+                })
+                .ToList();
+        }
+
+
 
         [HttpGet("{id}")]
         public async Task<ActionResult<InstalacionesDTOConTelefonos>> GetInstalacion(int id)
