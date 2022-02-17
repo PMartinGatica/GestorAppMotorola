@@ -24,8 +24,24 @@ namespace GestorAppMotorola.Controllers
             this.mapper = mapper;
         }
 
+
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<TelefonoDTOConSensores>>> GetTelefono()
+        public async Task<ActionResult<IEnumerable<TelefonoGetDTOGeneral>>> Telefonos()
+        {
+            var tel = await context.Telefono
+                .Include(dbtelefono => dbtelefono.Instalaciones)
+
+                .ThenInclude(dbapp => dbapp.App)
+                .Include(telefonoDB => telefonoDB.SensorTelefono)
+                .ThenInclude(sensortelefonoDB => sensortelefonoDB.Sensor)
+
+                .ToListAsync();
+            return mapper.Map<List<TelefonoGetDTOGeneral>>(tel);
+        }
+
+
+        [HttpGet("sensores")]
+        public async Task<ActionResult<IEnumerable<TelefonoDTOConSensores>>> sensores()
         {
             var tel = await context.Telefono
                 .Include(dbtelefono => dbtelefono.Instalaciones)
@@ -56,6 +72,27 @@ namespace GestorAppMotorola.Controllers
 
             
             return mapper.Map<TelefonoDTOConInstalaciones>(tel);
+        }
+
+
+        [HttpGet("FiltroSensor_App")]
+        public dynamic FiltroSensor_App(string sensor , string aplicacion)
+        {
+
+            return context.Instalacion
+                .Where(item => item.App.Nombre == aplicacion)
+                .Select(item => new
+                {
+                    aplicacion = item.App.Nombre,
+                    sensor = item.Telefono.SensorTelefono.Where(item=>item.Sensor.Nombre ==sensor)
+                    .Select(item => new {
+                    item.Sensor.Nombre,
+                    Telefono = item.Telefono.Marca
+                    
+                    }
+                    )
+                })
+                .ToList();
         }
 
 

@@ -33,7 +33,7 @@ namespace GestorAppMotorola.Utilidades
             
             CreateMap<TelefonoCreacionDTO, Telefono>()
                 .ForMember(telefono => telefono.SensorTelefono, opciones => opciones.MapFrom(MapSensorTelefono));
-            //CreateMap<Telefono, TelefonoGetDTO>();
+            CreateMap<Telefono, TelefonoGetDTOGeneral>();
             CreateMap<Telefono, TelefonoGetDTO>()
                 .ForMember(telefono => telefono.Sensor, opciones => opciones.MapFrom(MapTelefonoGetDTO));
             CreateMap<Telefono, TelefonoGetDTOId>();
