@@ -18,6 +18,9 @@ namespace GestorAppMotorola
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<SensorTelefono>()
                 .HasKey(x => new { x.SensorId, x.TelefonoId });
+
+
+
         }
 
         public DbSet<Operario> Operario { get; set; }

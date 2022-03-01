@@ -3,14 +3,16 @@ using System;
 using GestorAppMotorola;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace GestorAppMotorola.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    partial class ApplicationDBContextModelSnapshot : ModelSnapshot
+    [Migration("20220217002759_punto4")]
+    partial class punto4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -89,7 +91,12 @@ namespace GestorAppMotorola.Migrations
                     b.Property<string>("Nombre")
                         .HasColumnType("text");
 
+                    b.Property<int?>("TelefonoId")
+                        .HasColumnType("int");
+
                     b.HasKey("SensorId");
+
+                    b.HasIndex("TelefonoId");
 
                     b.ToTable("Sensor");
                 });
@@ -124,12 +131,7 @@ namespace GestorAppMotorola.Migrations
                     b.Property<float>("Precio")
                         .HasColumnType("float");
 
-                    b.Property<int?>("SensorId")
-                        .HasColumnType("int");
-
                     b.HasKey("TelefonoId");
-
-                    b.HasIndex("SensorId");
 
                     b.ToTable("Telefono");
                 });
@@ -161,6 +163,13 @@ namespace GestorAppMotorola.Migrations
                     b.Navigation("Telefono");
                 });
 
+            modelBuilder.Entity("GestorAppMotorola.Modelos.Sensor", b =>
+                {
+                    b.HasOne("GestorAppMotorola.Modelos.Telefono", null)
+                        .WithMany("Sensores")
+                        .HasForeignKey("TelefonoId");
+                });
+
             modelBuilder.Entity("GestorAppMotorola.Modelos.SensorTelefono", b =>
                 {
                     b.HasOne("GestorAppMotorola.Modelos.Sensor", "Sensor")
@@ -180,13 +189,6 @@ namespace GestorAppMotorola.Migrations
                     b.Navigation("Telefono");
                 });
 
-            modelBuilder.Entity("GestorAppMotorola.Modelos.Telefono", b =>
-                {
-                    b.HasOne("GestorAppMotorola.Modelos.Sensor", null)
-                        .WithMany("Telefonos")
-                        .HasForeignKey("SensorId");
-                });
-
             modelBuilder.Entity("GestorAppMotorola.Modelos.App", b =>
                 {
                     b.Navigation("Instalaciones");
@@ -200,13 +202,13 @@ namespace GestorAppMotorola.Migrations
             modelBuilder.Entity("GestorAppMotorola.Modelos.Sensor", b =>
                 {
                     b.Navigation("SensorTelefono");
-
-                    b.Navigation("Telefonos");
                 });
 
             modelBuilder.Entity("GestorAppMotorola.Modelos.Telefono", b =>
                 {
                     b.Navigation("Instalaciones");
+
+                    b.Navigation("Sensores");
 
                     b.Navigation("SensorTelefono");
                 });

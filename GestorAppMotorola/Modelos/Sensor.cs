@@ -12,5 +12,7 @@ namespace GestorAppMotorola.Modelos
 
         public List <SensorTelefono>SensorTelefono { get; set; }
 
+        //public virtual ICollection<Telefono> Telefonos { get; set; }
+
     }
 }

@@ -74,26 +74,57 @@ namespace GestorAppMotorola.Controllers
             return mapper.Map<TelefonoDTOConInstalaciones>(tel);
         }
 
+        [HttpGet("buscar")]
 
-        [HttpGet("FiltroSensor_App")]
-        public dynamic FiltroSensor_App(string sensor , string aplicacion)
+        public dynamic Buscar(string sensor = "", string aplicacion = "")
         {
+            //si filtro por aplicacion
+            if (sensor == "")
+            {
+                return context.App.Where(item =>
+                item.Nombre == aplicacion
+                )
+                       .Select(item => new
+                       {
+                           item.Nombre,
+                           telefonos = item.Instalaciones
+                           .Select(x =>new
+                           {
+                               x.Telefono.Marca,
+                               x.Telefono.Modelo,
 
-            return context.Instalacion
-                .Where(item => item.App.Nombre == aplicacion)
-                .Select(item => new
+                           })
+
+
+                       })
+                       .ToList();
+            }
+            else
+            {
+                //si filtro por sensor
+                if (aplicacion == "")
                 {
-                    aplicacion = item.App.Nombre,
-                    sensor = item.Telefono.SensorTelefono.Where(item=>item.Sensor.Nombre ==sensor)
-                    .Select(item => new {
-                    item.Sensor.Nombre,
-                    Telefono = item.Telefono.Marca
-                    
-                    }
-                    )
-                })
-                .ToList();
+                    return context.Sensor.Where(item => 
+                        item.Nombre == sensor
+                        )
+                    .Select(item => new
+                    {
+                        item.Nombre,
+                        Telefonos = item.SensorTelefono.Select(x => new
+                        {
+                            x.Telefono.Marca,
+                            x.Telefono.Modelo
+                        })
+                            
+                    })
+                    .ToList();
+                }
+            }
+
+            return "Elegir filtrar por Sensor o por Telefono";
+
         }
+
 
 
         [HttpPost]
