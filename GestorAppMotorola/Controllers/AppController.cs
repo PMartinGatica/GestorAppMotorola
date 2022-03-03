@@ -24,7 +24,16 @@ namespace GestorAppMotorola.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<AppDTOConInstalaciones>>> GetApp()
+        public async Task<ActionResult<IEnumerable<AppGetDTO>>> GetApp()
+        {
+            var app = await context.App
+                .ToListAsync();
+
+            return mapper.Map<List<AppGetDTO>>(app);
+        }
+
+        [HttpGet("exitosas")]
+        public async Task<ActionResult<IEnumerable<AppDTOConInstalaciones>>> GetExitosas()
         {
             var app = await context.App
                 .Include(x => x.Instalaciones)
@@ -35,7 +44,7 @@ namespace GestorAppMotorola.Controllers
 
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<AppDTOConInstalaciones>> GetApp(int id)
+        public async Task<ActionResult<AppDTOConInstalaciones>> GetAppID(int id)
         {
             var app = await context.App
                 .Include(appdb=>appdb.Instalaciones).FirstOrDefaultAsync(x=>x.AppId==id);
@@ -61,7 +70,7 @@ namespace GestorAppMotorola.Controllers
             return CreatedAtAction("GetApp", new { id = app.AppId }, app);
         }
 
-        [HttpPut("{id}")]
+        [HttpPut("{id}")]x
 
         public async Task<ActionResult> PutApp(App app, int id)
         {

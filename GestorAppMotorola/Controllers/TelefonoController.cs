@@ -121,7 +121,7 @@ namespace GestorAppMotorola.Controllers
                 }
             }
 
-            return "Elegir filtrar por Sensor o por Telefono";
+            return "filtrar la lista de teléfonos por sensor o app instalada";
 
         }
 
