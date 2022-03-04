@@ -31,26 +31,7 @@ namespace GestorAppMotorola.Controllers
             return mapper.Map<List<SensorGetDTO>>(sen);
         }
 
-        //[HttpGet("{nombre}")]
-        //public async Task<ActionResult<List<Sensor>>> Get(string nombre)
-        //{
-        //    var Sensors = await context.Sensor.Where(x => x.Nombre.Contains(nombre)).ToListAsync();
-
-        //    return Sensors;
-        //}
-
-        //[HttpGet("{id}")]
-        //public async Task<ActionResult<SensorGetDTO>> GetSensor(int id)
-        //{
-        //    var oper = await context.Sensor.Include(x => x.Instalacion).FirstOrDefaultAsync(x => x.Id == id);
-
-        //    if (oper == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    return mapper.Map<SensorGetDTO>(oper);
-        //}
+        
 
         [HttpGet("{id}")]
         public async Task<ActionResult<SensorGetDTO>> GetSensor(int id)
