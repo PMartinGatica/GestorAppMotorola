@@ -65,8 +65,7 @@ namespace GestorAppMotorola.Controllers
                 .Include(dbtelefono => dbtelefono.Instalaciones).ThenInclude(x=>x.App)
                 .Include(dbtelefono => dbtelefono.Instalaciones).ThenInclude(x => x.Operario)
              
-                //.Include(telefonoDB => telefonoDB.SensorTelefono)
-                //.ThenInclude(sensortelefonoDB => sensortelefonoDB.Sensor)
+                
                 .FirstOrDefaultAsync(x => x.TelefonoId == id);
 
 
@@ -78,7 +77,7 @@ namespace GestorAppMotorola.Controllers
 
         public dynamic Buscar(string sensor = "", string aplicacion = "")
         {
-            //si filtro por aplicacion
+            //filtro por aplicacion
             if (sensor == "")
             {
                 return context.App.Where(item =>
@@ -101,7 +100,7 @@ namespace GestorAppMotorola.Controllers
             }
             else
             {
-                //si filtro por sensor
+                //filtro por sensor
                 if (aplicacion == "")
                 {
                     return context.Sensor.Where(item => 
