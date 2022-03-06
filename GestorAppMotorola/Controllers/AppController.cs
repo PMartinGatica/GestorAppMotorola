@@ -47,7 +47,7 @@ namespace GestorAppMotorola.Controllers
         public async Task<ActionResult<AppGetDTO>> GetAppID(int id)
         {
             var app = await context.App
-                /*.Include(appdb=>appdb.Instalaciones)*/.FirstOrDefaultAsync(x=>x.AppId==id);
+            .FirstOrDefaultAsync(x=>x.AppId==id);
 
 
             if (app == null)
@@ -90,7 +90,7 @@ namespace GestorAppMotorola.Controllers
             {
                 if (!AppExiste(id))
                 {
-                    return NotFound(/*$"No existe la APP con el id {app.Id}"*/);
+                    return NotFound();
                 }
 
                 else
