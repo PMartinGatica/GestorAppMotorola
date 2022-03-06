@@ -30,24 +30,14 @@ namespace GestorAppMotorola.Controllers
         {
 
             var instalacion = await context.Instalacion
-                //.Include(x => x.Operario)
+                
                 .Include(x => x.App)
-                /*.Include(x => x.Telefono)*/.ToListAsync();
+                .ToListAsync();
 
             return mapper.Map<List<InstalacionGetDTO>>(instalacion);
         }
 
-        //[HttpGet("Filtro_App")]
-        //public async Task<ActionResult<IEnumerable<InstalacionGetDTOFiltroApp>>> GetFiltro_App()
-        //{
-
-        //    var instalacion = await context.Instalacion
-        //        .Include(x => x.Operario)
-        //        .Include(x => x.App)
-        //        .Include(x => x.Telefono).ToListAsync();
-
-        //    return mapper.Map<List<InstalacionGetDTOFiltroApp>>(instalacion);
-        //}
+        
 
         [HttpGet("instalaciondiaria")]
         public dynamic instalaciondiaria(DateTime fecha)
