@@ -20,10 +20,10 @@ namespace GestorAppMotorola.Utilidades
             CreateMap<App,AppDTOConInstalaciones>();
             CreateMap<App, AppGetDTO>();
 
-            
+            CreateMap<Instalacion, InstalacionesDTOConApp>();
             CreateMap<InstalacionCreacionDTO, Instalacion>();
             CreateMap<Instalacion , InstalacionGetDTO>();
-           
+            
             CreateMap<Instalacion, InstalacionesDTOConTelefonos>();
 
             CreateMap<SensorCreacionDTO,Sensor>();
