@@ -17,7 +17,7 @@ namespace GestorAppMotorola.Modelos
         public List <SensorTelefono>SensorTelefono { get; set; }
        public List<Instalacion> Instalaciones { get; set; }
 
-        //// public List< Sensor> Sensores { get; set; }
+        
         [NotMapped]
         public virtual SensorTelefono SensoresTelefonos { get; set; }
         [NotMapped]
@@ -26,14 +26,6 @@ namespace GestorAppMotorola.Modelos
         public virtual Instalacion Instala { get; set; }
 
 
-
-
-
-
-
-
-
-        // public List<Sensor> Sensores { get; set; }
 
     }
 }
